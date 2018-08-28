@@ -17,7 +17,9 @@
     </a>
 </p>
 
-A very light-weight action sheet (version 1.0.0 has 414 lines of code). There is close to zero configuration options because you are expected to build the UI.
+A very light-weight action sheet. There is close to zero configuration options because you are expected to build the UI.
+
+Version 1.0.0: **414 lines of code**
 
 Fade             |  Slide
 :-------------------------:|:-------------------------:
@@ -115,3 +117,23 @@ For the latest release, select the [Releases](https://github.com/rob-nash/Sheet/
 ## Demo
 
 Run the Xcode scheme named `Sender`.
+
+## Footnote
+
+Try to realise the truth 😎 There is no spoon 🥄
+
+![](https://user-images.githubusercontent.com/14126999/44734303-7c070b00-aae1-11e8-908d-eaa1a2246a2a.gif)
+
+```swift
+@IBAction func finishButtonPressed(_ sender: UIButton) {
+        let view = UIImageView(image: UIImage(named: "_paper_plane"))
+        view.contentMode = .scaleAspectFit
+        view.layoutIfNeeded()
+        view.isHidden = true
+        stackView.insertArrangedSubview(view, at: 0)
+        UIView.animate(withDuration: 0.3) {
+            view.isHidden = false
+        }
+//        NotificationCenter.default.post(name: .dismiss, object: nil)
+    }
+```
