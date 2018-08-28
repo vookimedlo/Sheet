@@ -109,10 +109,10 @@ class PresentationController: UIPresentationController {
     
     override func dismissalTransitionDidEnd(_ completed: Bool) {
         super.dismissalTransitionDidEnd(completed)
-        for child in presentedViewController.childViewControllers {
-            child.willMove(toParentViewController: nil)
+        for child in presentedViewController.children {
+            child.willMove(toParent: nil)
             child.view!.removeFromSuperview()
-            child.removeFromParentViewController()
+            child.removeFromParent()
         }
     }
 }

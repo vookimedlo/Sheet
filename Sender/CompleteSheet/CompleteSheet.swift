@@ -28,7 +28,7 @@ final class CompleteSheetViewController: UIViewController {
         return .lightContent
     }
     
-    override func prefersHomeIndicatorAutoHidden() -> Bool {
+    override var prefersHomeIndicatorAutoHidden: Bool {
         return true
     }
 }

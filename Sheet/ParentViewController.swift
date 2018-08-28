@@ -25,15 +25,15 @@ class ParentViewController: UIViewController {
     
     public override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {}
     
-    override public var childViewControllerForStatusBarStyle: UIViewController? {
-        return childViewControllers.last
+    override public var childForStatusBarStyle: UIViewController? {
+        return children.last
     }
     
-    override public func childViewControllerForHomeIndicatorAutoHidden() -> UIViewController? {
-        return childViewControllers.last
+    override var childForHomeIndicatorAutoHidden: UIViewController? {
+        return children.last
     }
     
-    override public var childViewControllerForStatusBarHidden: UIViewController? {
-        return childViewControllers.last
+    override public var childForStatusBarHidden: UIViewController? {
+        return children.last
     }
 }

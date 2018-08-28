@@ -27,9 +27,9 @@ final class SlideViewController: ParentViewController {
         
         vc.modalPresentationCapturesStatusBarAppearance = true
         
-        guard let child = childViewControllers.last else {
+        guard let child = children.last else {
             view.addSubview(vc.view!)
-            addChildViewController(vc)
+            addChild(vc)
             vc.view!.translatesAutoresizingMaskIntoConstraints = false
             centerXAnchor1 = vc.view!.centerXAnchor.constraint(equalTo: view.centerXAnchor)
             NSLayoutConstraint.activate([
@@ -37,7 +37,7 @@ final class SlideViewController: ParentViewController {
                 vc.view!.widthAnchor.constraint(equalTo: view.widthAnchor),
                 vc.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor)
                 ])
-            vc.didMove(toParentViewController: self)
+            vc.didMove(toParent: self)
             didShowViewController?()
             return
         }
@@ -51,10 +51,10 @@ final class SlideViewController: ParentViewController {
             }
         }
         
-        child.willMove(toParentViewController: nil)
+        child.willMove(toParent: nil)
         
         view.addSubview(vc.view!)
-        addChildViewController(vc)
+        addChild(vc)
         vc.view!.translatesAutoresizingMaskIntoConstraints = false
         centerXAnchor2 = vc.view!.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         NSLayoutConstraint.activate([
@@ -84,8 +84,8 @@ final class SlideViewController: ParentViewController {
             self.view.layoutSubviews()
         }) { _ in
             child.view!.removeFromSuperview()
-            child.removeFromParentViewController()
-            vc.didMove(toParentViewController: self)
+            child.removeFromParent()
+            vc.didMove(toParent: self)
             self.didShowViewController?()
         }
     }

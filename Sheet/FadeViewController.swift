@@ -10,16 +10,16 @@ final class FadeViewController: ParentViewController {
         
         vc.modalPresentationCapturesStatusBarAppearance = true
         
-        guard let child = childViewControllers.last else {
+        guard let child = children.last else {
             view.addSubview(vc.view!)
-            addChildViewController(vc)
+            addChild(vc)
             vc.view!.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
                 vc.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor),
                 vc.view!.leadingAnchor.constraint(equalTo: view.leadingAnchor),
                 vc.view!.trailingAnchor.constraint(equalTo: view.trailingAnchor)
                 ])
-            vc.didMove(toParentViewController: self)
+            vc.didMove(toParent: self)
             didShowViewController?()
             return
         }
@@ -31,8 +31,8 @@ final class FadeViewController: ParentViewController {
             vc.view!.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             vc.view!.trailingAnchor.constraint(equalTo: view.trailingAnchor)
             ])
-        child.willMove(toParentViewController: nil)
-        addChildViewController(vc)
+        child.willMove(toParent: nil)
+        addChild(vc)
         vc.view!.layoutIfNeeded()
         vc.view!.alpha = 0
         
@@ -41,11 +41,11 @@ final class FadeViewController: ParentViewController {
             self.view.layoutIfNeeded()
         }, completion: { (_) in
             child.view!.removeFromSuperview()
-            child.removeFromParentViewController()
+            child.removeFromParent()
             UIView.animate(withDuration: 0.3, delay: 0, options: [], animations: {
                 vc.view!.alpha = 1
             }, completion: { _ in
-                vc.didMove(toParentViewController: self)
+                vc.didMove(toParent: self)
                 self.didShowViewController?()
             })
         })
