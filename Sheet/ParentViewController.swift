@@ -22,9 +22,7 @@ class ParentViewController: UIViewController {
     }
     
     public override func show(_ vc: UIViewController, sender: Any?) {}
-    
-    public override func present(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)? = nil) {}
-    
+        
     override public var childViewControllerForStatusBarStyle: UIViewController? {
         return childViewControllers.last
     }

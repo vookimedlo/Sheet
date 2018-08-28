@@ -125,23 +125,11 @@ final class CustomPresentationController: PresentationController {
     
     override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
         return parentSize
-//        return CGSize(width: parentSize.width * 0.9, height: parentSize.height * 0.5)
     }
     
     override var frameOfPresentedViewInContainerView: CGRect {
-//        var frame = containerView!.frame
-//        let childSize = size(forChildContentContainer: presentedViewController, withParentContainerSize: containerView!.bounds.size)
-//        frame.origin.x = (frame.width - childSize.width) / 2.0
-//        frame.origin.y = (frame.height - childSize.height) - (childSize.width / 9.0)
-//        frame.size = childSize
         return containerView!.frame
     }
-    
-//    private func originForCentrePosition(of frame: CGRect, withChildSize childSize: CGSize) -> CGPoint {
-//        let x = (frame.size.width - childSize.width) / 2.0
-//        let y = (frame.size.height - childSize.height) / 2.0
-//        return CGPoint(x: x, y: y)
-//    }
 }
 
 final class ControllerTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
