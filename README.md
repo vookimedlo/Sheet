@@ -122,7 +122,7 @@ Run the Xcode scheme named `Sender`.
 
 Try to realise the truth 😎 There is no spoon 🥄
 
-![](https://user-images.githubusercontent.com/14126999/44734303-7c070b00-aae1-11e8-908d-eaa1a2246a2a.gif)
+![](https://user-images.githubusercontent.com/14126999/44734588-339c1d00-aae2-11e8-9f50-58b835654fef.gif)
 
 ```swift
 @IBAction func finishButtonPressed(_ sender: UIButton) {
