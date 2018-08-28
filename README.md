@@ -17,9 +17,7 @@
     </a>
 </p>
 
-A very light-weight action sheet. There is close to zero configuration options because you are expected to build the UI.
-
-Version 1.0.0: **414 lines of code**
+A very light-weight action sheet (**400 non-empty lines of code**).
 
 Fade             |  Slide
 :-------------------------:|:-------------------------:
