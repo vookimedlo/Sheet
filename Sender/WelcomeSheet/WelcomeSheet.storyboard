@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pIe-v1-FRG">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Welcome Sheet View Controller-->
+        <scene sceneID="ss6-nu-UiX">
+            <objects>
+                <viewController id="pIe-v1-FRG" customClass="WelcomeSheetViewController" customModule="Sender" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ue4-MO-JMb">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="n6v-Rd-n2b">
+                                <rect key="frame" x="20" y="40" width="335" height="627"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYS-hX-3RK">
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="100.5"/>
+                                        <string key="text">Welcome to 
+Sender</string>
+                                        <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="28"/>
+                                        <color key="textColor" red="0.52316765803747223" green="0.52316765803747223" blue="0.52316765803747223" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <view contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="iGs-69-Sfc">
+                                        <rect key="frame" x="0.0" y="118.5" width="335" height="366"/>
+                                        <subviews>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" image="_paper_plane" translatesAutoresizingMaskIntoConstraints="NO" id="muu-2z-XbH">
+                                                <rect key="frame" x="103.5" y="0.0" width="128" height="366"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="bottom" secondItem="muu-2z-XbH" secondAttribute="bottom" id="jZ1-xM-AT4"/>
+                                            <constraint firstItem="muu-2z-XbH" firstAttribute="top" secondItem="iGs-69-Sfc" secondAttribute="top" id="lLF-3t-R5q"/>
+                                            <constraint firstItem="muu-2z-XbH" firstAttribute="centerX" secondItem="iGs-69-Sfc" secondAttribute="centerX" id="ut1-2H-TR9"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="A quick and convenient tool for sending stuff" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1As-f4-slj">
+                                        <rect key="frame" x="0.0" y="502.5" width="335" height="46.5"/>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
+                                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4yA-pD-FTe">
+                                        <rect key="frame" x="0.0" y="567" width="335" height="60"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="60" id="pjX-iH-J2g"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="17"/>
+                                        <state key="normal" title="Start"/>
+                                        <connections>
+                                            <action selector="startButtonPressed:" destination="pIe-v1-FRG" eventType="touchUpInside" id="ns7-xW-iA6"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="P2q-Cb-c13" firstAttribute="bottom" secondItem="n6v-Rd-n2b" secondAttribute="bottom" id="LGb-W4-cl6"/>
+                            <constraint firstItem="n6v-Rd-n2b" firstAttribute="top" secondItem="P2q-Cb-c13" secondAttribute="top" constant="20" id="T25-6m-AEd"/>
+                            <constraint firstItem="P2q-Cb-c13" firstAttribute="trailing" secondItem="n6v-Rd-n2b" secondAttribute="trailing" constant="20" id="ul7-lN-weH"/>
+                            <constraint firstItem="n6v-Rd-n2b" firstAttribute="leading" secondItem="P2q-Cb-c13" secondAttribute="leading" constant="20" id="yuk-gL-lXJ"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="P2q-Cb-c13"/>
+                    </view>
+                    <connections>
+                        <outlet property="iconImageView" destination="muu-2z-XbH" id="Lz6-m4-FVI"/>
+                        <outlet property="startButton" destination="4yA-pD-FTe" id="iPl-Zg-cjP"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="26y-pH-lKd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="143" y="42"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="_paper_plane" width="128" height="128"/>
+    </resources>
+</document>
