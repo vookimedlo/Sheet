@@ -17,7 +17,7 @@
     </a>
 </p>
 
-A very light-weight action sheet (**400 non-empty lines of code**).
+A very light-weight action sheet.
 
 Fade             |  Slide
 :-------------------------:|:-------------------------:
