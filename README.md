@@ -45,8 +45,8 @@ class ViewController: UIViewController {
         sheetManager?.chromeTapped = { [unowned self] in
             self.dismiss(animated: true)
         }
-        NotificationCenter.default.addObserver(forName: .dismiss, object: nil, queue: nil) { _ in
-            self.dismiss(animated: true)
+        NotificationCenter.default.addObserver(forName: .dismiss, object: nil, queue: nil) { [weak self] _ in
+            self?.dismiss(animated: true)
         }
     }
     
