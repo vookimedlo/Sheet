@@ -1,5 +1,9 @@
 language: swift
 xcode_project: Sheet.xcodeproj
 
+branches:
+ only:
+ - master
+ 
 script: 
  - xcodebuild build -scheme Sheet -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=11.4'
