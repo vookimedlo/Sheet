@@ -17,7 +17,7 @@
     </a>
 </p>
 
-A very light-weight action sheet (**400 non-empty lines of code**).
+A very light-weight action sheet.
 
 Fade             |  Slide
 :-------------------------:|:-------------------------:
@@ -45,8 +45,8 @@ class ViewController: UIViewController {
         sheetManager?.chromeTapped = { [unowned self] in
             self.dismiss(animated: true)
         }
-        NotificationCenter.default.addObserver(forName: .dismiss, object: nil, queue: nil) { _ in
-            self.dismiss(animated: true)
+        NotificationCenter.default.addObserver(forName: .dismiss, object: nil, queue: nil) { [weak self] _ in
+            self?.dismiss(animated: true)
         }
     }
     
