@@ -2,6 +2,8 @@ import UIKit
 
 final class FadeViewController: ParentViewController {
     
+    private var currentConstraints: [NSLayoutConstraint]?
+    
     override func show(_ vc: UIViewController, sender: Any?) {
         
         let child = childViewControllers.first!
@@ -29,7 +31,7 @@ final class FadeViewController: ParentViewController {
         })
     }
     
-    fileprivate func portraitConstraints(_ vc: UIViewController) -> [NSLayoutConstraint] {
+    private func portraitConstraints(_ vc: UIViewController) -> [NSLayoutConstraint] {
         return [
             vc.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             vc.view!.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -37,7 +39,7 @@ final class FadeViewController: ParentViewController {
         ]
     }
     
-    fileprivate func landscapeConstraints(_ vc: UIViewController) -> [NSLayoutConstraint] {
+    private func landscapeConstraints(_ vc: UIViewController) -> [NSLayoutConstraint] {
         return [
             vc.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             vc.view!.widthAnchor.constraint(equalTo: view.heightAnchor),
@@ -49,12 +51,15 @@ final class FadeViewController: ParentViewController {
         guard let child = childViewControllers.last else {
             return
         }
+        if currentConstraints != nil {
+            NSLayoutConstraint.deactivate(currentConstraints!)
+        }
         if traitCollection.verticalSizeClass == .regular || traitCollection.verticalSizeClass == .unspecified {
-            NSLayoutConstraint.deactivate(landscapeConstraints(child))
-            NSLayoutConstraint.activate(portraitConstraints(child))
+            currentConstraints = portraitConstraints(child)
+            NSLayoutConstraint.activate(currentConstraints!)
         } else {
-            NSLayoutConstraint.deactivate(portraitConstraints(child))
-            NSLayoutConstraint.activate(landscapeConstraints(child))
+            currentConstraints = landscapeConstraints(child)
+            NSLayoutConstraint.activate(currentConstraints!)
         }
     }
     

@@ -3,7 +3,7 @@ import Sheet
 
 class ViewController: UIViewController {
 
-    private let sheetManager = SheetManager()
+    private let sheetManager = SheetManager(animation: .fade)
     
     override func viewDidLoad() {
         super.viewDidLoad()
