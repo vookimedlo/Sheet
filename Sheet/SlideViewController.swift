@@ -19,8 +19,6 @@ final class SlideViewController: ParentViewController {
     private var centerXAnchor1: NSLayoutConstraint!
     private var centerXAnchor2: NSLayoutConstraint!
     
-    private var previousConstraints: [NSLayoutConstraint]?
-    
     private func portraitConstraints(_ vc: UIViewController) -> [NSLayoutConstraint] {
         return [
             vc.view!.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -37,17 +35,18 @@ final class SlideViewController: ParentViewController {
         ]
     }
     
-    override func applyConstraints(_ traitCollection: UITraitCollection) {
+    override func setupInitialConstraints(_ traitCollection: UITraitCollection) {
         guard let child = childViewControllers.last else {
             return
         }
+        let constraints: [NSLayoutConstraint]
         if traitCollection.verticalSizeClass == .regular || traitCollection.verticalSizeClass == .unspecified {
-            let currentConstraints = portraitConstraints(child)
-            NSLayoutConstraint.activate(currentConstraints)
+            constraints = portraitConstraints(child)
         } else {
-            let currentConstraints = landscapeConstraints(child)
-            NSLayoutConstraint.activate(currentConstraints)
+            constraints = landscapeConstraints(child)
         }
+        centerXAnchor1 = constraints.first
+        NSLayoutConstraint.activate(constraints)
     }
 
     override func show(_ vc: UIViewController, sender: Any?) {
@@ -55,34 +54,18 @@ final class SlideViewController: ParentViewController {
         let child = childViewControllers.last!
         child.willMove(toParentViewController: nil)
 
-        for constraint in child.view!.constraints {
-            if let firstItem = constraint.firstItem as? UIView {
-                let firstAnchor = constraint.firstAnchor
-                let a = firstItem == child.view!
-                let b = firstAnchor is NSLayoutAnchor<NSLayoutXAxisAnchor>
-                if a && b {
-                    centerXAnchor1 = constraint
-                    break
-                }
-            }
-        }
-        
         view.addSubview(vc.view!)
         addChildViewController(vc)
         vc.view!.translatesAutoresizingMaskIntoConstraints = false
         
-        applyConstraints(traitCollection)
-        
-        for constraint in vc.view!.constraints {
-            if let firstItem = constraint.firstItem as? UIView {
-                let firstAnchor = constraint.firstAnchor
-                let a = firstItem == vc.view!
-                let b = firstAnchor is NSLayoutAnchor<NSLayoutXAxisAnchor>
-                if a && b {
-                    centerXAnchor2 = constraint
-                    break
-                }
-            }
+        if traitCollection.verticalSizeClass == .regular || traitCollection.verticalSizeClass == .unspecified {
+            let constraints = portraitConstraints(vc)
+            NSLayoutConstraint.activate(constraints)
+            centerXAnchor2 = constraints.first
+        } else {
+            let constraints = landscapeConstraints(vc)
+            NSLayoutConstraint.activate(constraints)
+            centerXAnchor2 = constraints.first
         }
         
         let width = view.bounds.width

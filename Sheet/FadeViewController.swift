@@ -12,7 +12,7 @@ final class FadeViewController: ParentViewController {
         view.addSubview(vc.view!)
         addChildViewController(vc)
         vc.view!.translatesAutoresizingMaskIntoConstraints = false
-        applyConstraints(traitCollection)
+        setupInitialConstraints(traitCollection)
         vc.view!.layoutIfNeeded()
         vc.view!.alpha = 0
         
@@ -47,7 +47,7 @@ final class FadeViewController: ParentViewController {
         ]
     }
     
-    override func applyConstraints(_ traitCollection: UITraitCollection) {
+    override func setupInitialConstraints(_ traitCollection: UITraitCollection) {
         guard let child = childViewControllers.last else {
             return
         }
@@ -65,7 +65,7 @@ final class FadeViewController: ParentViewController {
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
-        applyConstraints(newCollection)
+        setupInitialConstraints(newCollection)
         coordinator.animate(alongsideTransition: { [unowned self] _ in
             self.view.layoutIfNeeded()
         }, completion: nil)

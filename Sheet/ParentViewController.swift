@@ -30,7 +30,7 @@ class ParentViewController: UIViewController {
         vc.didMove(toParentViewController: self)
     }
     
-    func applyConstraints(_ traitCollection: UITraitCollection) {}
+    func setupInitialConstraints(_ traitCollection: UITraitCollection) {}
     
     override public var childViewControllerForStatusBarStyle: UIViewController? {
         return childViewControllers.last

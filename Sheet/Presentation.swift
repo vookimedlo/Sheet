@@ -76,7 +76,7 @@ fileprivate class PresentationController: UIPresentationController {
             ])
         
         let controller = presentedViewController as! ParentViewController
-        controller.applyConstraints(traitCollection)
+        controller.setupInitialConstraints(traitCollection)
         
         if let coordinator = presentedViewController.transitionCoordinator {
             coordinator.animate(alongsideTransition: { _ in
