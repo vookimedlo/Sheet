@@ -1,6 +1,6 @@
 import UIKit
 
-final class ControllerAnimator: NSObject {
+fileprivate final class ControllerAnimator: NSObject {
     var isPresentation: Bool = false
 }
 
@@ -12,21 +12,23 @@ extension ControllerAnimator: UIViewControllerAnimatedTransitioning {
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         
-        let detailController = transitionContext.viewController(forKey: isPresentation ? .to : .from)!
+        let containerView = transitionContext.containerView
+        
+        let controller = transitionContext.viewController(forKey: isPresentation ? .to : .from)!
         
         if isPresentation {
-            transitionContext.containerView.addSubview(detailController.view)
+            containerView.addSubview(controller.view)
         }
         
-        let presentedFrame = transitionContext.finalFrame(for: detailController)
+        let presentedFrame = transitionContext.finalFrame(for: controller)
         var dismissedFrame = presentedFrame
-        dismissedFrame.origin.y = transitionContext.containerView.frame.size.height
+        dismissedFrame.origin.y = containerView.frame.size.height
         
         let initialFrame = isPresentation ? dismissedFrame : presentedFrame
         let finalFrame = isPresentation ? presentedFrame : dismissedFrame
         
         let animationDuration = transitionDuration(using: transitionContext)
-        detailController.view.frame = initialFrame
+        controller.view.frame = initialFrame
         
         UIView.animate(withDuration: animationDuration,
                        delay: 0,
@@ -34,57 +36,52 @@ extension ControllerAnimator: UIViewControllerAnimatedTransitioning {
                        initialSpringVelocity: 5,
                        options: .beginFromCurrentState,
                        animations: {
-                        detailController.view.frame = finalFrame
+                        controller.view.frame = finalFrame
         }) { finished in
             transitionContext.completeTransition(finished)
         }
     }
 }
 
-class PresentationController: UIPresentationController {
+fileprivate class PresentationController: UIPresentationController {
     
-    fileprivate var dimmingView: UIView!
+    private let dimmingView: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor(white: 0.0, alpha: 0.4)
+        view.alpha = 0.0
+        return view
+    }()
     
-    typealias Action = () -> Void
-    
-    var backgroundTapped: Action?
-    
-    func setupDimmingView() {
-        dimmingView = UIView()
-        dimmingView.translatesAutoresizingMaskIntoConstraints = false
-        dimmingView.backgroundColor = UIColor(white: 0.0, alpha: 0.4)
-        dimmingView.alpha = 0.0
-        
-        let recognizer = UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:)))
-        dimmingView.addGestureRecognizer(recognizer)
+    override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
+        super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
+        dimmingView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleTap(recognizer:))))
     }
     
     @objc func handleTap(recognizer: UITapGestureRecognizer) {
         backgroundTapped?()
     }
     
-    override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
-        super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
-        setupDimmingView()
-    }
-    
+    var backgroundTapped: (() -> Void)?
+
     override func presentationTransitionWillBegin() {
-        let subview = dimmingView!
-        subview.translatesAutoresizingMaskIntoConstraints = false
-        containerView!.addSubview(subview)
+        super.presentationTransitionWillBegin()
+        
+        containerView!.addSubview(dimmingView)
         NSLayoutConstraint.activate([
-            subview.topAnchor.constraint(equalTo: containerView!.topAnchor),
-            subview.bottomAnchor.constraint(equalTo: containerView!.bottomAnchor),
-            subview.leadingAnchor.constraint(equalTo: containerView!.leadingAnchor),
-            subview.trailingAnchor.constraint(equalTo: containerView!.trailingAnchor)
+            dimmingView.topAnchor.constraint(equalTo: containerView!.topAnchor),
+            dimmingView.bottomAnchor.constraint(equalTo: containerView!.bottomAnchor),
+            dimmingView.leadingAnchor.constraint(equalTo: containerView!.leadingAnchor),
+            dimmingView.trailingAnchor.constraint(equalTo: containerView!.trailingAnchor)
             ])
-        guard let coordinator = presentedViewController.transitionCoordinator else {
+        
+        if let coordinator = presentedViewController.transitionCoordinator {
+            coordinator.animate(alongsideTransition: { _ in
+                self.dimmingView.alpha = 1.0
+            })
+        } else {
             dimmingView.alpha = 1.0
-            return
         }
-        coordinator.animate(alongsideTransition: { _ in
-            self.dimmingView.alpha = 1.0
-        })
     }
     
     override var adaptivePresentationStyle: UIModalPresentationStyle {
@@ -93,14 +90,21 @@ class PresentationController: UIPresentationController {
     
     override func dismissalTransitionWillBegin() {
         super.dismissalTransitionWillBegin()
-        guard let coordinator = presentedViewController.transitionCoordinator else {
-            dimmingView.alpha = 0.0
-            return
+        if let coordinator = presentedViewController.transitionCoordinator {
+            coordinator.animate(alongsideTransition: { _ in
+                self.dimmingView.alpha = 0
+            })
+        } else {
+            dimmingView.alpha = 0
         }
-        
-        coordinator.animate(alongsideTransition: { _ in
-            self.dimmingView.alpha = 0.0
-        })
+    }
+    
+    override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
+        return parentSize
+    }
+    
+    override var frameOfPresentedViewInContainerView: CGRect {
+        return containerView!.frame
     }
     
     override func containerViewWillLayoutSubviews() {
@@ -117,31 +121,15 @@ class PresentationController: UIPresentationController {
     }
 }
 
-final class CustomPresentationController: PresentationController {
-        
-    override init(presentedViewController: UIViewController, presenting presentingViewController: UIViewController?) {
-        super.init(presentedViewController: presentedViewController, presenting: presentingViewController)
-    }
-    
-    override func size(forChildContentContainer container: UIContentContainer, withParentContainerSize parentSize: CGSize) -> CGSize {
-        return parentSize
-    }
-    
-    override var frameOfPresentedViewInContainerView: CGRect {
-        return containerView!.frame
-    }
+final class ControllerTransitioningDelegate: NSObject {
+    var chromeViewTapped: (() -> Void)?
+    fileprivate let animator = ControllerAnimator()
 }
 
-final class ControllerTransitioningDelegate: NSObject, UIViewControllerTransitioningDelegate {
-    
-    typealias Action = () -> Void
-    
-    var chromeViewTapped: Action?
-    
-    private let animator = ControllerAnimator()
+extension ControllerTransitioningDelegate: UIViewControllerTransitioningDelegate {
     
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        let controller = CustomPresentationController(presentedViewController: presented, presenting: presenting)
+        let controller = PresentationController(presentedViewController: presented, presenting: presenting)
         controller.backgroundTapped = chromeViewTapped
         return controller
     }

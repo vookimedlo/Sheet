@@ -20,7 +20,7 @@ final class FadeViewController: ParentViewController {
                 vc.view!.trailingAnchor.constraint(equalTo: view.trailingAnchor)
                 ])
             vc.didMove(toParentViewController: self)
-            didShowViewController?()
+            didShow?()
             return
         }
         
@@ -46,7 +46,7 @@ final class FadeViewController: ParentViewController {
                 vc.view!.alpha = 1
             }, completion: { _ in
                 vc.didMove(toParentViewController: self)
-                self.didShowViewController?()
+                self.didShow?()
             })
         })
     }

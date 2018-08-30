@@ -1,6 +1,6 @@
 import UIKit
 
-final class ParentView: UIView {
+fileprivate final class ParentView: UIView {
     
     override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         for subview in subviews.reversed() {
@@ -15,7 +15,7 @@ final class ParentView: UIView {
 
 class ParentViewController: UIViewController {
     
-    var didShowViewController: (() -> Void)?
+    var didShow: (() -> Void)?
     
     override public func loadView() {
         self.view = ParentView()
