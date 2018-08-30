@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RJC-V9-aSh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="RJC-V9-aSh">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,16 +19,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="h6r-sw-98N">
-                                <rect key="frame" x="20" y="20" width="335" height="647"/>
+                                <rect key="frame" x="20" y="20" width="335" height="617"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All Done" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jgi-Pi-h1o">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="185"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="155"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="28"/>
                                         <color key="textColor" red="0.52316765799999998" green="0.52316765799999998" blue="0.52316765799999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="0TD-F7-QDi">
-                                        <rect key="frame" x="0.0" y="203" width="335" height="366"/>
+                                        <rect key="frame" x="0.0" y="173" width="335" height="366"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" image="_paper_plane" translatesAutoresizingMaskIntoConstraints="NO" id="Eyf-xA-MdW">
                                                 <rect key="frame" x="103.5" y="0.0" width="128" height="366"/>
@@ -42,7 +42,7 @@
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zei-eq-ExR">
-                                        <rect key="frame" x="0.0" y="587" width="335" height="60"/>
+                                        <rect key="frame" x="0.0" y="557" width="335" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="1Aq-Cm-rLe"/>
                                         </constraints>
@@ -59,7 +59,7 @@
                         <constraints>
                             <constraint firstItem="h6r-sw-98N" firstAttribute="top" secondItem="lwX-uH-FZk" secondAttribute="top" constant="20" id="Hau-wc-NDT"/>
                             <constraint firstItem="h6r-sw-98N" firstAttribute="leading" secondItem="9YB-eQ-ZzT" secondAttribute="leading" constant="20" id="P3T-kg-Kte"/>
-                            <constraint firstItem="9YB-eQ-ZzT" firstAttribute="bottom" secondItem="h6r-sw-98N" secondAttribute="bottom" id="Y9f-dr-TNC"/>
+                            <constraint firstAttribute="bottom" secondItem="h6r-sw-98N" secondAttribute="bottom" constant="30" id="Y9f-dr-TNC"/>
                             <constraint firstItem="9YB-eQ-ZzT" firstAttribute="trailing" secondItem="h6r-sw-98N" secondAttribute="trailing" constant="20" id="clB-JU-HaZ"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="9YB-eQ-ZzT"/>

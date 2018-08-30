@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.13.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.9"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -18,17 +18,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="_sky" translatesAutoresizingMaskIntoConstraints="NO" id="Xlo-CH-7Yy">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="697"/>
+                            <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="_sky" translatesAutoresizingMaskIntoConstraints="NO" id="Xlo-CH-7Yy">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <variation key="heightClass=compact" image="_lake"/>
                             </imageView>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="Xlo-CH-7Yy" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Ho5-MK-FdW"/>
-                            <constraint firstItem="Xlo-CH-7Yy" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="HtX-WR-VSq"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Xlo-CH-7Yy" secondAttribute="bottom" constant="-30" id="YE8-UC-F39">
+                            <constraint firstItem="Xlo-CH-7Yy" firstAttribute="left" secondItem="8bC-Xf-vdC" secondAttribute="left" id="Ho5-MK-FdW"/>
+                            <constraint firstItem="Xlo-CH-7Yy" firstAttribute="bottom" secondItem="8bC-Xf-vdC" secondAttribute="bottom" id="YE8-UC-F39">
                                 <variation key="heightClass=compact" constant="0.0"/>
                             </constraint>
                             <constraint firstItem="Xlo-CH-7Yy" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="sLb-pI-ujh"/>
+                            <constraint firstItem="Xlo-CH-7Yy" firstAttribute="right" secondItem="8bC-Xf-vdC" secondAttribute="right" id="sM6-lJ-WEb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -39,6 +40,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="_lake" width="683" height="432"/>
         <image name="_sky" width="360" height="640"/>
     </resources>
 </document>

@@ -19,10 +19,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="n6v-Rd-n2b">
-                                <rect key="frame" x="20" y="40" width="335" height="627"/>
+                                <rect key="frame" x="20" y="40" width="335" height="597"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qYS-hX-3RK">
-                                        <rect key="frame" x="0.0" y="0.0" width="335" height="100.5"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="335" height="76.5"/>
                                         <string key="text">Welcome to 
 Sender</string>
                                         <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="28"/>
@@ -30,10 +30,10 @@ Sender</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" verticalHuggingPriority="252" translatesAutoresizingMaskIntoConstraints="NO" id="iGs-69-Sfc">
-                                        <rect key="frame" x="0.0" y="118.5" width="335" height="366"/>
+                                        <rect key="frame" x="0.0" y="94.5" width="335" height="360"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="252" image="_paper_plane" translatesAutoresizingMaskIntoConstraints="NO" id="muu-2z-XbH">
-                                                <rect key="frame" x="103.5" y="0.0" width="128" height="366"/>
+                                                <rect key="frame" x="103.5" y="0.0" width="128" height="360"/>
                                             </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -44,13 +44,13 @@ Sender</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="A quick and convenient tool for sending stuff" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1As-f4-slj">
-                                        <rect key="frame" x="0.0" y="502.5" width="335" height="46.5"/>
+                                        <rect key="frame" x="0.0" y="472.5" width="335" height="46.5"/>
                                         <fontDescription key="fontDescription" name="AvenirNext-Medium" family="Avenir Next" pointSize="17"/>
                                         <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4yA-pD-FTe">
-                                        <rect key="frame" x="0.0" y="567" width="335" height="60"/>
+                                        <rect key="frame" x="0.0" y="537" width="335" height="60"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="60" id="pjX-iH-J2g"/>
                                         </constraints>
@@ -65,7 +65,7 @@ Sender</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="P2q-Cb-c13" firstAttribute="bottom" secondItem="n6v-Rd-n2b" secondAttribute="bottom" id="LGb-W4-cl6"/>
+                            <constraint firstAttribute="bottom" secondItem="n6v-Rd-n2b" secondAttribute="bottom" constant="30" id="LGb-W4-cl6"/>
                             <constraint firstItem="n6v-Rd-n2b" firstAttribute="top" secondItem="P2q-Cb-c13" secondAttribute="top" constant="20" id="T25-6m-AEd"/>
                             <constraint firstItem="P2q-Cb-c13" firstAttribute="trailing" secondItem="n6v-Rd-n2b" secondAttribute="trailing" constant="20" id="ul7-lN-weH"/>
                             <constraint firstItem="n6v-Rd-n2b" firstAttribute="leading" secondItem="P2q-Cb-c13" secondAttribute="leading" constant="20" id="yuk-gL-lXJ"/>
