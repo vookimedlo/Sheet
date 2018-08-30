@@ -21,6 +21,16 @@ class ParentViewController: UIViewController {
         self.view = ParentView()
     }
     
+    /// A stack of child viewControllers is not maintained. Once a sheet is positioned on screen, any previous child is removed.
+    var primaryChild: UIViewController? {
+        return childViewControllers.first
+    }
+    
+    /// During a transition between childViewControllers, there may be a second child viewController.
+    var secondaryChild: UIViewController? {
+        return childViewControllers.last
+    }
+    
     func setup(with vc: UIViewController) {
         vc.loadViewIfNeeded()
         vc.modalPresentationCapturesStatusBarAppearance = true
@@ -30,7 +40,11 @@ class ParentViewController: UIViewController {
         vc.didMove(toParentViewController: self)
     }
     
-    func setupInitialConstraints(_ traitCollection: UITraitCollection) {}
+    func setupInitialConstraints(_ traitCollection: UITraitCollection) {
+        setupPrimaryChildConstraints(primaryChild!, traitCollection)
+    }
+    
+    func setupPrimaryChildConstraints(_ primaryChild: UIViewController, _ traitCollection: UITraitCollection) {}
     
     override public var childViewControllerForStatusBarStyle: UIViewController? {
         return childViewControllers.last
