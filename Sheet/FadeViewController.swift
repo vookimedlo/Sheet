@@ -2,52 +2,70 @@ import UIKit
 
 final class FadeViewController: ParentViewController {
     
-    override func show(_ vc: UIViewController, sender: Any?) {
-        go(vc)
+    override func setupPrimaryChildConstraints(_ primaryChild: UIViewController, _ traitCollection: UITraitCollection) {
+        let constraints = traitCollection.constraints(forChild: primaryChild.view, inParent: view)
+        NSLayoutConstraint.activate(constraints)
+        primaryConstraints = constraints
     }
+    
+    override func show(_ vc: UIViewController, sender: Any?) {
         
-    private func go(_ vc: UIViewController) {
+        primaryChild!.willMove(toParent: nil)
         
-        vc.modalPresentationCapturesStatusBarAppearance = true
+        addChild(vc) // we now have a secondary child
         
-        guard let child = children.last else {
-            view.addSubview(vc.view!)
-            addChild(vc)
-            vc.view!.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                vc.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                vc.view!.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                vc.view!.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-                ])
-            vc.didMove(toParent: self)
-            didShow?()
-            return
-        }
+        view.addSubview(secondaryChild!.view!)
         
-        view.addSubview(vc.view!)
-        vc.view!.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            vc.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            vc.view!.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            vc.view!.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-            ])
-        child.willMove(toParent: nil)
-        addChild(vc)
-        vc.view!.layoutIfNeeded()
-        vc.view!.alpha = 0
+        secondaryChild!.view!.translatesAutoresizingMaskIntoConstraints = false
         
+        secondaryChild!.view!.alpha = 0
+        
+        let secondaryConstraints = traitCollection.constraints(forChild: secondaryChild!.view, inParent: view)
+        NSLayoutConstraint.activate(secondaryConstraints)
+        
+        secondaryChild!.view!.layoutIfNeeded()
+        view.layoutIfNeeded()
+
         UIView.animate(withDuration: 0.3, delay: 0, options: [], animations: {
-            child.view!.alpha = 0
-            self.view.layoutIfNeeded()
+            self.primaryChild!.view!.alpha = 0
         }, completion: { (_) in
-            child.view!.removeFromSuperview()
-            child.removeFromParent()
+            self.primaryChild!.view!.removeFromSuperview()
             UIView.animate(withDuration: 0.3, delay: 0, options: [], animations: {
-                vc.view!.alpha = 1
+                self.secondaryChild!.view!.alpha = 1
             }, completion: { _ in
-                vc.didMove(toParent: self)
+                self.secondaryChild!.didMove(toParent: self)
+                self.primaryChild!.removeFromParent() // array popped. secondary becomes primary.
+                self.primaryConstraints = secondaryConstraints // secondary became primary
                 self.didShow?()
             })
         })
+    }
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        NSLayoutConstraint.deactivate(primaryConstraints)
+        let constraints = newCollection.constraints(forChild: primaryChild!.view, inParent: view)
+        NSLayoutConstraint.activate(constraints)
+        primaryConstraints = constraints
+        coordinator.animate(alongsideTransition: { [unowned self] _ in
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
+    
+    private var primaryConstraints: [NSLayoutConstraint]!
+}
+
+private extension UITraitCollection {
+    func constraints(forChild childView: UIView, inParent parentView: UIView) -> [NSLayoutConstraint] {
+        var constraints = [NSLayoutConstraint]()
+        constraints.append(childView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor))
+        if verticalSizeClass == .regular || verticalSizeClass == .unspecified {
+            constraints.append(childView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor))
+            constraints.append(childView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor))
+        } else {
+            constraints.append(childView.widthAnchor.constraint(equalTo: parentView.heightAnchor))
+            constraints.append(childView.centerXAnchor.constraint(equalTo: parentView.centerXAnchor))
+        }
+        return constraints
     }
 }

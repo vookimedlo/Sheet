@@ -2,6 +2,84 @@ import UIKit
 
 final class SlideViewController: ParentViewController {
     
+    var animation: Animation = .slideRight
+    
+    override func setupPrimaryChildConstraints(_ primaryChild: UIViewController, _ traitCollection: UITraitCollection) {
+        let constraints = makeConstraints(for: .primary, using: traitCollection)
+        NSLayoutConstraint.activate(constraints)
+        primaryConstraints = constraints
+    }
+    
+    override func show(_ vc: UIViewController, sender: Any?) {
+        
+        primaryChild!.willMove(toParent: nil)
+        
+        addChild(vc) // we now have a secondary child
+        
+        view.addSubview(secondaryChild!.view!)
+        
+        secondaryChild!.view!.translatesAutoresizingMaskIntoConstraints = false
+        
+        let secondaryConstraints = makeConstraints(for: .secondary, using: traitCollection)
+        NSLayoutConstraint.activate(secondaryConstraints)
+        
+        let width = view.bounds.width
+        
+        switch animation {
+        case .slideRight:
+            secondaryAnchorConstraint.constant -= width
+            secondaryChild!.view!.layoutIfNeeded()
+            view.layoutIfNeeded()
+            primaryAnchorConstraint.constant += width
+            secondaryAnchorConstraint.constant += width
+        case .slideLeft:
+            secondaryAnchorConstraint.constant += width
+            secondaryChild!.view!.layoutIfNeeded()
+            view.layoutIfNeeded()
+            primaryAnchorConstraint.constant -= width
+            secondaryAnchorConstraint.constant -= width
+        }
+        
+        UIView.animate(withDuration: 0.3, animations: {
+            self.view.layoutIfNeeded()
+        }) { _ in
+            self.secondaryChild!.didMove(toParent: self)
+            self.primaryChild!.view!.removeFromSuperview()
+            self.primaryChild!.removeFromParent() // array popped. secondary becomes primary.
+            self.primaryAnchorConstraint = self.secondaryAnchorConstraint // secondary became primary.
+            self.primaryConstraints = secondaryConstraints // secondary became primary
+            self.didShow?()
+        }
+    }
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        NSLayoutConstraint.deactivate(primaryConstraints) // there will only be one child at this point
+        let constraints = makeConstraints(for: .primary, using: newCollection)
+        NSLayoutConstraint.activate(constraints)
+        primaryConstraints = constraints
+        coordinator.animate(alongsideTransition: { [unowned self] _ in
+            self.view.layoutIfNeeded()
+            }, completion: nil)
+    }
+    
+    private enum Child {
+        case primary, secondary
+    }
+    
+    private func makeConstraints(for child: Child, using traitCollection: UITraitCollection) -> [NSLayoutConstraint] {
+        let constraints: [NSLayoutConstraint]
+        switch child {
+        case .primary:
+            constraints = traitCollection.constraints(forChild: primaryChild!.view, inParent: view)
+            primaryAnchorConstraint = constraints.first
+        case .secondary:
+            constraints = traitCollection.constraints(forChild: secondaryChild!.view, inParent: view)
+            secondaryAnchorConstraint = constraints.first
+        }
+        return constraints
+    }
+    
     enum Animation {
         case slideRight, slideLeft
         init(_ animation: SheetManager.Animation) {
@@ -14,79 +92,21 @@ final class SlideViewController: ParentViewController {
         }
     }
     
-    override func show(_ vc: UIViewController, sender: Any?) {
-        go(vc)
-    }
-        
-    private var centerXAnchor1: NSLayoutConstraint!
-    private var centerXAnchor2: NSLayoutConstraint!
-    
-    var animation: Animation = .slideRight
-    
-    private func go(_ vc: UIViewController) {
-        
-        vc.modalPresentationCapturesStatusBarAppearance = true
-        
-        guard let child = children.last else {
-            view.addSubview(vc.view!)
-            addChild(vc)
-            vc.view!.translatesAutoresizingMaskIntoConstraints = false
-            centerXAnchor1 = vc.view!.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-            NSLayoutConstraint.activate([
-                centerXAnchor1!,
-                vc.view!.widthAnchor.constraint(equalTo: view.widthAnchor),
-                vc.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-                ])
-            vc.didMove(toParent: self)
-            didShow?()
-            return
+    private var primaryAnchorConstraint: NSLayoutConstraint!
+    private var secondaryAnchorConstraint: NSLayoutConstraint!
+    private var primaryConstraints: [NSLayoutConstraint]!
+}
+
+private extension UITraitCollection {
+    func constraints(forChild childView: UIView, inParent parentView: UIView) -> [NSLayoutConstraint] {
+        var constraints = [NSLayoutConstraint]()
+        constraints.append(childView.centerXAnchor.constraint(equalTo: parentView.centerXAnchor))
+        if verticalSizeClass == .regular || verticalSizeClass == .unspecified {
+            constraints.append(childView.widthAnchor.constraint(equalTo: parentView.widthAnchor))
+        } else {
+            constraints.append(childView.widthAnchor.constraint(equalTo: parentView.heightAnchor))
         }
-        
-        for constraint in child.view!.constraints {
-            if let firstItem = constraint.firstItem as? UIView {
-                if firstItem == child.view! && constraint.firstAnchor.isEqual(centerXAnchor2) {
-                    centerXAnchor1 = centerXAnchor2
-                    break
-                }
-            }
-        }
-        
-        child.willMove(toParent: nil)
-        
-        view.addSubview(vc.view!)
-        addChild(vc)
-        vc.view!.translatesAutoresizingMaskIntoConstraints = false
-        centerXAnchor2 = vc.view!.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        NSLayoutConstraint.activate([
-            centerXAnchor2,
-            vc.view!.widthAnchor.constraint(equalTo: view.widthAnchor),
-            vc.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-            ])
-        
-        let width = view.bounds.width
-        
-        switch animation {
-        case .slideRight:
-            centerXAnchor2?.constant -= width
-            vc.view!.layoutIfNeeded()
-            view.layoutIfNeeded()
-            centerXAnchor1?.constant += width
-            centerXAnchor2?.constant += width
-        case .slideLeft:
-            centerXAnchor2?.constant += width
-            vc.view!.layoutIfNeeded()
-            view.layoutIfNeeded()
-            centerXAnchor1?.constant -= width
-            centerXAnchor2?.constant -= width
-        }
-        
-        UIView.animate(withDuration: 0.3, animations: {
-            self.view.layoutSubviews()
-        }) { _ in
-            child.view!.removeFromSuperview()
-            child.removeFromParent()
-            vc.didMove(toParent: self)
-            self.didShow?()
-        }
+        constraints.append(childView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor))
+        return constraints
     }
 }

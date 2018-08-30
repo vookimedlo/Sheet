@@ -16,7 +16,11 @@ public final class SheetManager {
     
     private let transitionHandler = ControllerTransitioningDelegate()
     
-    private weak var root: UIViewController?
+    private weak var root: UIViewController? {
+        didSet {
+            parentViewController.didShow = didShow
+        }
+    }
     
     public init(animation: Animation = .fade) {
         switch animation {
@@ -48,13 +52,16 @@ public final class SheetManager {
     
     public func show(_ viewController: UIViewController, above root: UIViewController) {
         self.root = root
-        parentViewController.loadViewIfNeeded()
-        parentViewController.show(viewController, sender: self)
-        parentViewController.didShow = didShow
+        parentViewController.setup(with: viewController)
+        runSetNeeds()
         root.present(parentViewController, animated: true)
     }
     
     private func didShow() {
+        runSetNeeds()
+    }
+    
+    private func runSetNeeds() {
         root!.setNeedsStatusBarAppearanceUpdate()
         root!.setNeedsUpdateOfHomeIndicatorAutoHidden()
     }

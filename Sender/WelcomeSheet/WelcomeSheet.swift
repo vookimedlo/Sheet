@@ -1,6 +1,6 @@
 import UIKit
 
-final class WelcomeSheetViewController: UIViewController {
+final class WelcomeSheetViewController: BaseViewController {
     
     @IBOutlet weak var iconImageView: UIImageView! {
         didSet {
@@ -19,17 +19,18 @@ final class WelcomeSheetViewController: UIViewController {
         show(viewController, sender: self)
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        view.clipsToBounds = true
-        view.layer.cornerRadius = view.bounds.width * 0.1
+    @IBOutlet weak var iconImageViewContainerView: UIView!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        iconImageViewContainerView.isHidden = (traitCollection.verticalSizeClass == .compact)
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-    
-    override var prefersHomeIndicatorAutoHidden: Bool {
-        return true
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        iconImageViewContainerView.isHidden = (newCollection.verticalSizeClass == .compact)
+        coordinator.animate(alongsideTransition: { [unowned self] _ in
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
 }
