@@ -4,6 +4,10 @@ final class FadeViewController: ParentViewController {
     
     private var currentConstraints: [NSLayoutConstraint]?
     
+    override func setupInitialConstraints(_ traitCollection: UITraitCollection) {
+        refreshConstraints(traitCollection)
+    }
+    
     override func show(_ vc: UIViewController, sender: Any?) {
         
         let child = childViewControllers.first!
@@ -12,7 +16,7 @@ final class FadeViewController: ParentViewController {
         view.addSubview(vc.view!)
         addChildViewController(vc)
         vc.view!.translatesAutoresizingMaskIntoConstraints = false
-        setupInitialConstraints(traitCollection)
+        refreshConstraints(traitCollection)
         vc.view!.layoutIfNeeded()
         vc.view!.alpha = 0
         
@@ -31,23 +35,15 @@ final class FadeViewController: ParentViewController {
         })
     }
     
-    private func portraitConstraints(_ vc: UIViewController) -> [NSLayoutConstraint] {
-        return [
-            vc.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            vc.view!.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            vc.view!.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-        ]
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        refreshConstraints(newCollection)
+        coordinator.animate(alongsideTransition: { [unowned self] _ in
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
     
-    private func landscapeConstraints(_ vc: UIViewController) -> [NSLayoutConstraint] {
-        return [
-            vc.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            vc.view!.widthAnchor.constraint(equalTo: view.heightAnchor),
-            vc.view!.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ]
-    }
-    
-    override func setupInitialConstraints(_ traitCollection: UITraitCollection) {
+    private func refreshConstraints(_ traitCollection: UITraitCollection) {
         guard let child = childViewControllers.last else {
             return
         }
@@ -55,19 +51,19 @@ final class FadeViewController: ParentViewController {
             NSLayoutConstraint.deactivate(currentConstraints!)
         }
         if traitCollection.verticalSizeClass == .regular || traitCollection.verticalSizeClass == .unspecified {
-            currentConstraints = portraitConstraints(child)
+            currentConstraints = [
+                child.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                child.view!.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+                child.view!.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            ]
             NSLayoutConstraint.activate(currentConstraints!)
         } else {
-            currentConstraints = landscapeConstraints(child)
+            currentConstraints = [
+                child.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+                child.view!.widthAnchor.constraint(equalTo: view.heightAnchor),
+                child.view!.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+            ]
             NSLayoutConstraint.activate(currentConstraints!)
         }
-    }
-    
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransition(to: newCollection, with: coordinator)
-        setupInitialConstraints(newCollection)
-        coordinator.animate(alongsideTransition: { [unowned self] _ in
-            self.view.layoutIfNeeded()
-        }, completion: nil)
     }
 }

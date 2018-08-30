@@ -16,41 +16,18 @@ final class SlideViewController: ParentViewController {
         }
     }
     
-    private var centerXAnchor1: NSLayoutConstraint!
-    private var centerXAnchor2: NSLayoutConstraint!
-    
-    private func portraitConstraints(_ vc: UIViewController) -> [NSLayoutConstraint] {
-        return [
-            vc.view!.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            vc.view!.widthAnchor.constraint(equalTo: view.widthAnchor),
-            vc.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ]
-    }
-    
-    private func landscapeConstraints(_ vc: UIViewController) -> [NSLayoutConstraint] {
-        return [
-            vc.view!.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            vc.view!.widthAnchor.constraint(equalTo: view.heightAnchor),
-            vc.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ]
-    }
+    private var currentConstraints: [NSLayoutConstraint]?
     
     override func setupInitialConstraints(_ traitCollection: UITraitCollection) {
         guard let child = childViewControllers.last else {
             return
         }
-        let constraints: [NSLayoutConstraint]
-        if traitCollection.verticalSizeClass == .regular || traitCollection.verticalSizeClass == .unspecified {
-            constraints = portraitConstraints(child)
-        } else {
-            constraints = landscapeConstraints(child)
-        }
-        centerXAnchor1 = constraints.first
-        NSLayoutConstraint.activate(constraints)
-        currentConstraints = constraints
+        extractedFunc(child, traitCollection)
+        centerXAnchor1 = currentConstraints?.first
     }
     
-    private var currentConstraints: [NSLayoutConstraint]?
+    private var centerXAnchor1: NSLayoutConstraint!
+    private var centerXAnchor2: NSLayoutConstraint!
     
     override func show(_ vc: UIViewController, sender: Any?) {
         
@@ -75,17 +52,8 @@ final class SlideViewController: ParentViewController {
             }
         }
         
-        if traitCollection.verticalSizeClass == .regular || traitCollection.verticalSizeClass == .unspecified {
-            let constraints = portraitConstraints(vc)
-            NSLayoutConstraint.activate(constraints)
-            centerXAnchor2 = constraints.first
-            currentConstraints = constraints
-        } else {
-            let constraints = landscapeConstraints(vc)
-            NSLayoutConstraint.activate(constraints)
-            centerXAnchor2 = constraints.first
-            currentConstraints = constraints
-        }
+        extractedFunc(vc, traitCollection)
+        centerXAnchor2 = currentConstraints?.first
         
         let width = view.bounds.width
         
@@ -116,21 +84,33 @@ final class SlideViewController: ParentViewController {
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
-        guard let child = childViewControllers.last else { return }
-        NSLayoutConstraint.deactivate(currentConstraints!)
-        if newCollection.verticalSizeClass == .regular || newCollection.verticalSizeClass == .unspecified {
-            let constraints = portraitConstraints(child)
-            NSLayoutConstraint.activate(constraints)
-            centerXAnchor1 = constraints.first
-            currentConstraints = constraints
-        } else {
-            let constraints = landscapeConstraints(child)
-            NSLayoutConstraint.activate(constraints)
-            centerXAnchor1 = constraints.first
-            currentConstraints = constraints
+        guard let child = childViewControllers.last else {
+            return
         }
+        NSLayoutConstraint.deactivate(currentConstraints!)
+        extractedFunc(child, newCollection)
+        centerXAnchor1 = currentConstraints?.first
         coordinator.animate(alongsideTransition: { [unowned self] _ in
             self.view.layoutIfNeeded()
             }, completion: nil)
+    }
+    
+    private func extractedFunc(_ child: UIViewController, _ newCollection: UITraitCollection) {
+        let constraints: [NSLayoutConstraint]
+        if newCollection.verticalSizeClass == .regular || newCollection.verticalSizeClass == .unspecified {
+            constraints = [
+                child.view!.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                child.view!.widthAnchor.constraint(equalTo: view.widthAnchor),
+                child.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ]
+        } else {
+            constraints = [
+                child.view!.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                child.view!.widthAnchor.constraint(equalTo: view.heightAnchor),
+                child.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            ]
+        }
+        NSLayoutConstraint.activate(constraints)
+        currentConstraints = constraints
     }
 }
