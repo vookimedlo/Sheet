@@ -75,6 +75,9 @@ fileprivate class PresentationController: UIPresentationController {
             dimmingView.trailingAnchor.constraint(equalTo: containerView!.trailingAnchor)
             ])
         
+        let controller = presentedViewController as! ParentViewController
+        controller.applyConstraints(traitCollection)
+        
         if let coordinator = presentedViewController.transitionCoordinator {
             coordinator.animate(alongsideTransition: { _ in
                 self.dimmingView.alpha = 1.0

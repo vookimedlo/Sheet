@@ -2,6 +2,8 @@ import UIKit
 
 final class WelcomeSheetViewController: UIViewController {
     
+    @IBOutlet weak var iconImageViewContainerView: UIView!
+    
     @IBOutlet weak var iconImageView: UIImageView! {
         didSet {
             Customiser.customise(iconImageView)
@@ -19,6 +21,11 @@ final class WelcomeSheetViewController: UIViewController {
         show(viewController, sender: self)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        iconImageViewContainerView.isHidden = (traitCollection.verticalSizeClass == .compact)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         view.clipsToBounds = true
@@ -31,5 +38,13 @@ final class WelcomeSheetViewController: UIViewController {
     
     override func prefersHomeIndicatorAutoHidden() -> Bool {
         return true
+    }
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        iconImageViewContainerView.isHidden = (newCollection.verticalSizeClass == .compact)
+        coordinator.animate(alongsideTransition: { [unowned self] _ in
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
 }

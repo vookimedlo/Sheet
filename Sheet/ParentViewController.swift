@@ -21,8 +21,20 @@ class ParentViewController: UIViewController {
         self.view = ParentView()
     }
     
-    public override func show(_ vc: UIViewController, sender: Any?) {}
-        
+//    public override func show(_ vc: UIViewController, sender: Any?) {}
+    
+    func setup(with vc: UIViewController) {
+        vc.loadViewIfNeeded()
+        vc.modalPresentationCapturesStatusBarAppearance = true
+        view.addSubview(vc.view!)
+        addChildViewController(vc)
+        vc.view!.translatesAutoresizingMaskIntoConstraints = false
+        vc.didMove(toParentViewController: self)
+    }
+    
+    func applyConstraints(_ traitCollection: UITraitCollection) {
+    }
+    
     override public var childViewControllerForStatusBarStyle: UIViewController? {
         return childViewControllers.last
     }

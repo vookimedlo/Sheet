@@ -3,36 +3,14 @@ import UIKit
 final class FadeViewController: ParentViewController {
     
     override func show(_ vc: UIViewController, sender: Any?) {
-        go(vc)
-    }
         
-    private func go(_ vc: UIViewController) {
-        
-        vc.modalPresentationCapturesStatusBarAppearance = true
-        
-        guard let child = childViewControllers.last else {
-            view.addSubview(vc.view!)
-            addChildViewController(vc)
-            vc.view!.translatesAutoresizingMaskIntoConstraints = false
-            NSLayoutConstraint.activate([
-                vc.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-                vc.view!.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-                vc.view!.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-                ])
-            vc.didMove(toParentViewController: self)
-            didShow?()
-            return
-        }
+        let child = childViewControllers.first!
+        child.willMove(toParentViewController: nil)
         
         view.addSubview(vc.view!)
-        vc.view!.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            vc.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            vc.view!.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            vc.view!.trailingAnchor.constraint(equalTo: view.trailingAnchor)
-            ])
-        child.willMove(toParentViewController: nil)
         addChildViewController(vc)
+        vc.view!.translatesAutoresizingMaskIntoConstraints = false
+        applyConstraints(traitCollection)
         vc.view!.layoutIfNeeded()
         vc.view!.alpha = 0
         
@@ -49,5 +27,42 @@ final class FadeViewController: ParentViewController {
                 self.didShow?()
             })
         })
+    }
+    
+    fileprivate func portraitConstraints(_ vc: UIViewController) -> [NSLayoutConstraint] {
+        return [
+            vc.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            vc.view!.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            vc.view!.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ]
+    }
+    
+    fileprivate func landscapeConstraints(_ vc: UIViewController) -> [NSLayoutConstraint] {
+        return [
+            vc.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            vc.view!.widthAnchor.constraint(equalTo: view.heightAnchor),
+            vc.view!.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ]
+    }
+    
+    override func applyConstraints(_ traitCollection: UITraitCollection) {
+        guard let child = childViewControllers.last else {
+            return
+        }
+        if traitCollection.verticalSizeClass == .regular || traitCollection.verticalSizeClass == .unspecified {
+            NSLayoutConstraint.deactivate(landscapeConstraints(child))
+            NSLayoutConstraint.activate(portraitConstraints(child))
+        } else {
+            NSLayoutConstraint.deactivate(portraitConstraints(child))
+            NSLayoutConstraint.activate(landscapeConstraints(child))
+        }
+    }
+    
+    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.willTransition(to: newCollection, with: coordinator)
+        applyConstraints(newCollection)
+        coordinator.animate(alongsideTransition: { [unowned self] _ in
+            self.view.layoutIfNeeded()
+        }, completion: nil)
     }
 }
