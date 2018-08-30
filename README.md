@@ -48,10 +48,6 @@ class ViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: .dismiss, object: nil, queue: nil) { [weak self] _ in
             self?.dismiss(animated: true)
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognized(_:)))
         view.addGestureRecognizer(tapGesture)
     }
@@ -65,7 +61,11 @@ class ViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
 }
+```
 
+You can use a storyboard to build the individual sheets, if you wish. The first sheet in the above gif is `WelcomeSheetViewController`.
+
+```swift
 final class WelcomeSheetViewController: UIViewController {
         
     @IBAction func startButtonPressed(_ sender: UIButton) {
@@ -83,7 +83,11 @@ final class WelcomeSheetViewController: UIViewController {
         return .lightContent
     }
 }
+```
 
+The second sheet in the above gif is `CompleteSheetViewController`.
+
+```swift
 final class CompleteSheetViewController: UIViewController {
         
     @IBAction func finishButtonPressed(_ sender: UIButton) {
@@ -101,6 +105,8 @@ final class CompleteSheetViewController: UIViewController {
     }
 }
 ```
+
+The `viewDidLayoutSubviews` implementation is common between both controllers. You could put that code in a superclass implementation if you wish?
 
 ## Installation
 
