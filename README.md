@@ -37,16 +37,15 @@ extension Notification.Name {
 
 class ViewController: UIViewController {
 
-    private var sheetManager: SheetManager?
+    private let sheetManager = SheetManager(animation: .slideLeft)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        sheetManager = SheetManager(root: self, animation: .slideLeft)
-        sheetManager?.chromeTapped = { [unowned self] in
+        sheetManager.chromeTapped = { [unowned self] in
             self.dismiss(animated: true)
         }
-        NotificationCenter.default.addObserver(forName: .dismiss, object: nil, queue: nil) { [weak self] _ in
-            self?.dismiss(animated: true)
+        NotificationCenter.default.addObserver(forName: .dismiss, object: nil, queue: nil) { _ in
+            self.dismiss(animated: true)
         }
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognized(_:)))
         view.addGestureRecognizer(tapGesture)
@@ -54,7 +53,7 @@ class ViewController: UIViewController {
     
     @objc func tapGestureRecognized(_ sender: UITapGestureRecognizer) {
         let viewController = UIStoryboard(name: "WelcomeSheet", bundle: nil).instantiateInitialViewController()!
-        sheetManager?.present(viewController)
+        sheetManager.show(viewController, above: self)
     }
     
     deinit {

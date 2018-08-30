@@ -6,4 +6,5 @@ branches:
  - master
  
 script: 
- - xcodebuild build -scheme Sheet -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=11.4'
+ - xcodebuild -scheme Sender -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=11.4' test
+ 

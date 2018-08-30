@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5005C4042138249F00873318 /* SenderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5005C4032138249F00873318 /* SenderUITests.swift */; };
+		5005C40C2138250D00873318 /* Sheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50FB6A132134139E002D0551 /* Sheet.framework */; };
+		5005C40D2138256200873318 /* Sheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50FB6A132134139E002D0551 /* Sheet.framework */; };
+		5005C40E2138256200873318 /* Sheet.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 50FB6A132134139E002D0551 /* Sheet.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		50E624652135371300F1CC98 /* CompleteSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E624642135371300F1CC98 /* CompleteSheet.swift */; };
 		50E624682135371D00F1CC98 /* CompleteSheet.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 50E624672135371D00F1CC98 /* CompleteSheet.storyboard */; };
 		50E6246A2135383D00F1CC98 /* Customiser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E624692135383D00F1CC98 /* Customiser.swift */; };
@@ -25,6 +29,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		5005C4062138249F00873318 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 50FB6A0A2134139E002D0551 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 50FB6A21213413C4002D0551;
+			remoteInfo = Sender;
+		};
 		50FB6A3E21343603002D0551 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 50FB6A0A2134139E002D0551 /* Project object */;
@@ -34,7 +45,24 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		5005C40F2138256200873318 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5005C40E2138256200873318 /* Sheet.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		5005C4012138249F00873318 /* SenderUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SenderUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		5005C4032138249F00873318 /* SenderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SenderUITests.swift; sourceTree = "<group>"; };
+		5005C4052138249F00873318 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		50E624642135371300F1CC98 /* CompleteSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompleteSheet.swift; sourceTree = "<group>"; };
 		50E624672135371D00F1CC98 /* CompleteSheet.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = CompleteSheet.storyboard; sourceTree = "<group>"; };
 		50E624692135383D00F1CC98 /* Customiser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Customiser.swift; sourceTree = "<group>"; };
@@ -57,6 +85,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		5005C3FE2138249F00873318 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5005C40C2138250D00873318 /* Sheet.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		50FB6A0F2134139E002D0551 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -68,12 +104,22 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5005C40D2138256200873318 /* Sheet.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5005C4022138249F00873318 /* SenderUITests */ = {
+			isa = PBXGroup;
+			children = (
+				5005C4032138249F00873318 /* SenderUITests.swift */,
+				5005C4052138249F00873318 /* Info.plist */,
+			);
+			path = SenderUITests;
+			sourceTree = "<group>";
+		};
 		50E62463213536D500F1CC98 /* WelcomeSheet */ = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +143,7 @@
 			children = (
 				50FB6A152134139E002D0551 /* Sheet */,
 				50FB6A23213413C4002D0551 /* Sender */,
+				5005C4022138249F00873318 /* SenderUITests */,
 				50FB6A142134139E002D0551 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -106,6 +153,7 @@
 			children = (
 				50FB6A132134139E002D0551 /* Sheet.framework */,
 				50FB6A22213413C4002D0551 /* Sender.app */,
+				5005C4012138249F00873318 /* SenderUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -152,6 +200,24 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		5005C4002138249F00873318 /* SenderUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 5005C40A2138249F00873318 /* Build configuration list for PBXNativeTarget "SenderUITests" */;
+			buildPhases = (
+				5005C3FD2138249F00873318 /* Sources */,
+				5005C3FE2138249F00873318 /* Frameworks */,
+				5005C3FF2138249F00873318 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5005C4072138249F00873318 /* PBXTargetDependency */,
+			);
+			name = SenderUITests;
+			productName = SenderUITests;
+			productReference = 5005C4012138249F00873318 /* SenderUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 		50FB6A122134139E002D0551 /* Sheet */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 50FB6A1B2134139E002D0551 /* Build configuration list for PBXNativeTarget "Sheet" */;
@@ -177,6 +243,7 @@
 				50FB6A1E213413C4002D0551 /* Sources */,
 				50FB6A1F213413C4002D0551 /* Frameworks */,
 				50FB6A20213413C4002D0551 /* Resources */,
+				5005C40F2138256200873318 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -198,6 +265,11 @@
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = "Robert Nash";
 				TargetAttributes = {
+					5005C4002138249F00873318 = {
+						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 1000;
+						TestTargetID = 50FB6A21213413C4002D0551;
+					};
 					50FB6A122134139E002D0551 = {
 						CreatedOnToolsVersion = 9.4.1;
 						LastSwiftMigration = 1000;
@@ -223,11 +295,19 @@
 			targets = (
 				50FB6A122134139E002D0551 /* Sheet */,
 				50FB6A21213413C4002D0551 /* Sender */,
+				5005C4002138249F00873318 /* SenderUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		5005C3FF2138249F00873318 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		50FB6A112134139E002D0551 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -250,6 +330,14 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		5005C3FD2138249F00873318 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5005C4042138249F00873318 /* SenderUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		50FB6A0E2134139E002D0551 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -277,6 +365,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		5005C4072138249F00873318 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 50FB6A21213413C4002D0551 /* Sender */;
+			targetProxy = 5005C4062138249F00873318 /* PBXContainerItemProxy */;
+		};
 		50FB6A3F21343603002D0551 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 50FB6A122134139E002D0551 /* Sheet */;
@@ -304,6 +397,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		5005C4082138249F00873318 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GGEF6W7K94;
+				INFOPLIST_FILE = SenderUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.robertnash.SenderUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Sender;
+			};
+			name = Debug;
+		};
+		5005C4092138249F00873318 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = GGEF6W7K94;
+				INFOPLIST_FILE = SenderUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.robertnash.SenderUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Sender;
+			};
+			name = Release;
+		};
 		50FB6A192134139E002D0551 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -482,7 +613,7 @@
 		50FB6A32213413C5002D0551 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
@@ -502,7 +633,7 @@
 		50FB6A33213413C5002D0551 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = NO;
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
@@ -522,6 +653,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		5005C40A2138249F00873318 /* Build configuration list for PBXNativeTarget "SenderUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5005C4082138249F00873318 /* Debug */,
+				5005C4092138249F00873318 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		50FB6A0D2134139E002D0551 /* Build configuration list for PBXProject "Sheet" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

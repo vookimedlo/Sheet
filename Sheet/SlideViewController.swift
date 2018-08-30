@@ -38,7 +38,7 @@ final class SlideViewController: ParentViewController {
                 vc.view!.bottomAnchor.constraint(equalTo: view.bottomAnchor)
                 ])
             vc.didMove(toParent: self)
-            didShowViewController?()
+            didShow?()
             return
         }
         
@@ -86,7 +86,7 @@ final class SlideViewController: ParentViewController {
             child.view!.removeFromSuperview()
             child.removeFromParent()
             vc.didMove(toParent: self)
-            self.didShowViewController?()
+            self.didShow?()
         }
     }
 }
