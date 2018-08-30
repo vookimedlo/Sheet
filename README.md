@@ -106,6 +106,8 @@ final class CompleteSheetViewController: UIViewController {
 }
 ```
 
+The `viewDidLayoutSubviews` implementation is common between both controllers. You could put that code in a superclass implementation if you wish?
+
 ## Installation
 
 Add the following to your `Cartfile`.
