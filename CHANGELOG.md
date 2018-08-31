@@ -1,5 +1,9 @@
 # Change Log
 
+## [2.2.1](https://github.com/rob-nash/Sheet/releases/tag/2.2.1) (2018-Aug-31)
+
+- Fixed: The framework target `CFBundleShortVersionString` assignment was not bumped to reflect the current release.
+
 ## [2.2.0](https://github.com/rob-nash/Sheet/releases/tag/2.2.0) (2018-Aug-31)
 
 - Width of sheet capped at 414 points. The largests non-iPad devices are 414 points in width.
