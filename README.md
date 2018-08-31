@@ -86,6 +86,8 @@ final class WelcomeSheetViewController: UIViewController {
 }
 ```
 
+- [The Vanishing Paper Plane](https://github.com/rob-nash/Sheet/wiki/Responding-To-Size-Class-Changes)
+
 The second sheet in the above gif is named `CompleteSheetViewController`. It looks like this.
 
 ```swift
