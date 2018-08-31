@@ -86,8 +86,6 @@ final class WelcomeSheetViewController: UIViewController {
 }
 ```
 
-- [The Vanishing Paper Plane](https://github.com/rob-nash/Sheet/wiki/Responding-To-Size-Class-Changes)
-
 The second sheet in the above gif is named `CompleteSheetViewController`. It looks like this.
 
 ```swift
@@ -108,6 +106,8 @@ final class CompleteSheetViewController: UIViewController {
 The `viewDidLayoutSubviews` implementation is common between both controllers, so you might want to create a superclass for it.
 
 - [Storyboard Layout](https://github.com/rob-nash/Sheet/wiki/Storyboard-Implementations)
+- [Safe Area Insets](https://github.com/rob-nash/Sheet/wiki/Safe-Area-Insets)
+- [The Vanishing Paper Plane](https://github.com/rob-nash/Sheet/wiki/Responding-To-Size-Class-Changes)
 
 ## Installation
 
