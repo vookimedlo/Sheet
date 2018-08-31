@@ -17,7 +17,7 @@
     </a>
 </p>
 
-A very light-weight action sheet.
+A very light-weight action sheet. Responds to vertical and horizontal size class changes.
 
 Fade             |  Slide
 :-------------------------:|:-------------------------:
@@ -62,7 +62,7 @@ class ViewController: UIViewController {
 }
 ```
 
-You can use a storyboard to build the individual sheets, if you wish. The first sheet in the above gif is `WelcomeSheetViewController`.
+You can use a storyboard to build the individual sheets, if you wish. The first sheet in the above gif is named `WelcomeSheetViewController`. It looks like this.
 
 ```swift
 final class WelcomeSheetViewController: UIViewController {
@@ -77,14 +77,10 @@ final class WelcomeSheetViewController: UIViewController {
         view.clipsToBounds = true
         view.layer.cornerRadius = view.bounds.width * 0.1
     }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
 }
 ```
 
-The second sheet in the above gif is `CompleteSheetViewController`.
+The second sheet in the above gif is named `CompleteSheetViewController`. It looks like this.
 
 ```swift
 final class CompleteSheetViewController: UIViewController {
@@ -98,14 +94,10 @@ final class CompleteSheetViewController: UIViewController {
         view.clipsToBounds = true
         view.layer.cornerRadius = view.bounds.width * 0.1
     }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
 }
 ```
 
-The `viewDidLayoutSubviews` implementation is common between both controllers. You could put that code in a superclass implementation if you wish?
+The `viewDidLayoutSubviews` implementation is common between both controllers, so you might want to create a superclass for it.
 
 ## Installation
 
