@@ -9,23 +9,15 @@ final class FadeViewController: ParentViewController {
     }
     
     override func show(_ vc: UIViewController, sender: Any?) {
-        
         primaryChild!.willMove(toParent: nil)
-        
         addChild(vc) // we now have a secondary child
-        
         view.addSubview(secondaryChild!.view!)
-        
         secondaryChild!.view!.translatesAutoresizingMaskIntoConstraints = false
-        
         secondaryChild!.view!.alpha = 0
-        
         let secondaryConstraints = traitCollection.constraints(forChild: secondaryChild!.view, inParent: view)
         NSLayoutConstraint.activate(secondaryConstraints)
-        
         secondaryChild!.view!.layoutIfNeeded()
         view.layoutIfNeeded()
-
         UIView.animate(withDuration: 0.3, delay: 0, options: [], animations: {
             self.primaryChild!.view!.alpha = 0
         }, completion: { (_) in
@@ -40,7 +32,7 @@ final class FadeViewController: ParentViewController {
             })
         })
     }
-    
+
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
         NSLayoutConstraint.deactivate(primaryConstraints)
@@ -59,12 +51,15 @@ private extension UITraitCollection {
     func constraints(forChild childView: UIView, inParent parentView: UIView) -> [NSLayoutConstraint] {
         var constraints = [NSLayoutConstraint]()
         constraints.append(childView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor))
+        constraints.append(childView.centerXAnchor.constraint(equalTo: parentView.centerXAnchor))
         if verticalSizeClass == .regular || verticalSizeClass == .unspecified {
-            constraints.append(childView.leadingAnchor.constraint(equalTo: parentView.leadingAnchor))
-            constraints.append(childView.trailingAnchor.constraint(equalTo: parentView.trailingAnchor))
+            let constraint = childView.widthAnchor.constraint(equalTo: parentView.widthAnchor)
+            constraint.priority = .defaultHigh
+            constraints.append(constraint)
+            let views: [String : Any] = ["childView" : childView]
+            constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "[childView(<=414@1000)]", options: [], metrics: nil, views: views))
         } else {
             constraints.append(childView.widthAnchor.constraint(equalTo: parentView.heightAnchor))
-            constraints.append(childView.centerXAnchor.constraint(equalTo: parentView.centerXAnchor))
         }
         return constraints
     }

@@ -17,11 +17,17 @@
     </a>
 </p>
 
-A very light-weight action sheet. Responds to vertical and horizontal size class changes.
+A very light-weight action sheet. Responds to size class changes.
+
+## Animations
 
 Fade             |  Slide
 :-------------------------:|:-------------------------:
 ![Fade](https://user-images.githubusercontent.com/14126999/44885530-3dc44400-acb9-11e8-868f-20f8780ad24d.gif)  |  ![Slide](https://user-images.githubusercontent.com/14126999/44885592-94ca1900-acb9-11e8-9f91-2b8ca042cddf.gif)
+
+## iPad
+
+![iPad](https://user-images.githubusercontent.com/14126999/44899553-fca05400-acf9-11e8-878e-de5bcff58c9d.gif)
 
 ## Usage
 
@@ -44,8 +50,8 @@ class ViewController: UIViewController {
         sheetManager.chromeTapped = { [unowned self] in
             self.dismiss(animated: true)
         }
-        NotificationCenter.default.addObserver(forName: .dismiss, object: nil, queue: nil) { _ in
-            self.dismiss(animated: true)
+        NotificationCenter.default.addObserver(forName: .dismiss, object: nil, queue: nil) { [weak self] _ in
+            self?.dismiss(animated: true)
         }
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognized(_:)))
         view.addGestureRecognizer(tapGesture)
@@ -98,6 +104,10 @@ final class CompleteSheetViewController: UIViewController {
 ```
 
 The `viewDidLayoutSubviews` implementation is common between both controllers, so you might want to create a superclass for it.
+
+- [Storyboard Layout](https://github.com/rob-nash/Sheet/wiki/Storyboard-Implementations)
+- [Safe Area Insets](https://github.com/rob-nash/Sheet/wiki/Safe-Area-Insets)
+- [The Vanishing Paper Plane](https://github.com/rob-nash/Sheet/wiki/Responding-To-Size-Class-Changes)
 
 ## Installation
 
