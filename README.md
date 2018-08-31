@@ -50,8 +50,8 @@ class ViewController: UIViewController {
         sheetManager.chromeTapped = { [unowned self] in
             self.dismiss(animated: true)
         }
-        NotificationCenter.default.addObserver(forName: .dismiss, object: nil, queue: nil) { [unowned self] _ in
-            self.dismiss(animated: true)
+        NotificationCenter.default.addObserver(forName: .dismiss, object: nil, queue: nil) { [weak self] _ in
+            self?.dismiss(animated: true)
         }
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tapGestureRecognized(_:)))
         view.addGestureRecognizer(tapGesture)
