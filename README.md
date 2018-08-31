@@ -21,7 +21,7 @@ A very light-weight action sheet.
 
 Fade             |  Slide
 :-------------------------:|:-------------------------:
-![Demo1](https://user-images.githubusercontent.com/14126999/44732870-31d05a80-aade-11e8-9073-294dfa345cc3.gif)  |  ![Demo2](https://user-images.githubusercontent.com/14126999/44732911-41e83a00-aade-11e8-956f-0b093fb085dd.gif)
+![Fade](https://user-images.githubusercontent.com/14126999/44885530-3dc44400-acb9-11e8-868f-20f8780ad24d.gif)  |  ![Slide](https://user-images.githubusercontent.com/14126999/44885592-94ca1900-acb9-11e8-9f91-2b8ca042cddf.gif)
 
 ## Usage
 
