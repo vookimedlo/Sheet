@@ -17,7 +17,7 @@
     </a>
 </p>
 
-A very light-weight action sheet. Responds to vertical and horizontal size class changes.
+A very light-weight action sheet. Responds to size class changes.
 
 ## Animations
 
