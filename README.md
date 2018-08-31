@@ -19,9 +19,15 @@
 
 A very light-weight action sheet. Responds to vertical and horizontal size class changes.
 
+## Animations
+
 Fade             |  Slide
 :-------------------------:|:-------------------------:
 ![Fade](https://user-images.githubusercontent.com/14126999/44885530-3dc44400-acb9-11e8-868f-20f8780ad24d.gif)  |  ![Slide](https://user-images.githubusercontent.com/14126999/44885592-94ca1900-acb9-11e8-9f91-2b8ca042cddf.gif)
+
+## iPad
+
+![iPad](https://user-images.githubusercontent.com/14126999/44899553-fca05400-acf9-11e8-878e-de5bcff58c9d.gif)
 
 ## Usage
 
