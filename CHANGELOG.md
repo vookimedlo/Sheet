@@ -1,5 +1,9 @@
 # Change Log
 
+## [2.2.0]() (2018-Aug-31)
+
+- Width of sheet capped at 414 points. The largests non-iPad devices are 414 points in width.
+
 ## [2.1.0]() (2018-Aug-31)
 
 - Now supports device rotation by responding to `traitCollection.verticalSizeClass` changes.
