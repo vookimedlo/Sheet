@@ -107,6 +107,8 @@ final class CompleteSheetViewController: UIViewController {
 
 The `viewDidLayoutSubviews` implementation is common between both controllers, so you might want to create a superclass for it.
 
+- [Storyboard Layout](https://github.com/rob-nash/Sheet/wiki/Storyboard-Implementations)
+
 ## Installation
 
 Add the following to your `Cartfile`.
