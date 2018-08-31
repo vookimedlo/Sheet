@@ -17,11 +17,11 @@
     </a>
 </p>
 
-A very light-weight action sheet.
+A very light-weight action sheet. Responds to vertical and horizontal size class changes.
 
 Fade             |  Slide
 :-------------------------:|:-------------------------:
-![Demo1](https://user-images.githubusercontent.com/14126999/44732870-31d05a80-aade-11e8-9073-294dfa345cc3.gif)  |  ![Demo2](https://user-images.githubusercontent.com/14126999/44732911-41e83a00-aade-11e8-956f-0b093fb085dd.gif)
+![Fade](https://user-images.githubusercontent.com/14126999/44885530-3dc44400-acb9-11e8-868f-20f8780ad24d.gif)  |  ![Slide](https://user-images.githubusercontent.com/14126999/44885592-94ca1900-acb9-11e8-9f91-2b8ca042cddf.gif)
 
 ## Usage
 
@@ -62,7 +62,7 @@ class ViewController: UIViewController {
 }
 ```
 
-You can use a storyboard to build the individual sheets, if you wish. The first sheet in the above gif is `WelcomeSheetViewController`.
+You can use a storyboard to build the individual sheets, if you wish. The first sheet in the above gif is named `WelcomeSheetViewController`. It looks like this.
 
 ```swift
 final class WelcomeSheetViewController: UIViewController {
@@ -77,14 +77,10 @@ final class WelcomeSheetViewController: UIViewController {
         view.clipsToBounds = true
         view.layer.cornerRadius = view.bounds.width * 0.1
     }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
 }
 ```
 
-The second sheet in the above gif is `CompleteSheetViewController`.
+The second sheet in the above gif is named `CompleteSheetViewController`. It looks like this.
 
 ```swift
 final class CompleteSheetViewController: UIViewController {
@@ -98,14 +94,10 @@ final class CompleteSheetViewController: UIViewController {
         view.clipsToBounds = true
         view.layer.cornerRadius = view.bounds.width * 0.1
     }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
 }
 ```
 
-The `viewDidLayoutSubviews` implementation is common between both controllers. You could put that code in a superclass implementation if you wish?
+The `viewDidLayoutSubviews` implementation is common between both controllers, so you might want to create a superclass for it.
 
 ## Installation
 
