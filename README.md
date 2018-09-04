@@ -142,3 +142,5 @@ Try to realise the truth 😎 There is no spoon 🥄
 //        NotificationCenter.default.post(name: .dismiss, object: nil)
     }
 ```
+
+![](https://user-images.githubusercontent.com/14126999/45015713-726a2f80-b01a-11e8-9372-8d7a63cbc5c6.png)
