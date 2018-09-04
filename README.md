@@ -143,4 +143,4 @@ Try to realise the truth 😎 There is no spoon 🥄
     }
 ```
 
-![](https://user-images.githubusercontent.com/14126999/45015713-726a2f80-b01a-11e8-9372-8d7a63cbc5c6.png)
+![](https://user-images.githubusercontent.com/14126999/45015849-d987e400-b01a-11e8-8437-c97cc62f5c61.png)
