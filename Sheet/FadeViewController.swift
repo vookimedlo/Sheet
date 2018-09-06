@@ -54,7 +54,7 @@ private extension UITraitCollection {
         constraints.append(childView.centerXAnchor.constraint(equalTo: parentView.centerXAnchor))
         if verticalSizeClass == .regular || verticalSizeClass == .unspecified {
             let constraint = childView.widthAnchor.constraint(equalTo: parentView.widthAnchor)
-            constraint.priority = .defaultHigh
+            constraint.priority = UILayoutPriority(rawValue: 999)
             constraints.append(constraint)
             let views: [String : Any] = ["childView" : childView]
             constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "[childView(<=414@1000)]", options: [], metrics: nil, views: views))
