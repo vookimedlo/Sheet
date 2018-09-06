@@ -1,5 +1,9 @@
 # Change Log
 
+## [2.2.2](https://github.com/rob-nash/Sheet/releases/tag/2.2.2)
+
+- Fixed: GitHub issue [#2](https://github.com/rob-nash/Sheet/issues/2). UI pushes beyond view port on 4 inch devices.
+
 ## [2.2.1](https://github.com/rob-nash/Sheet/releases/tag/2.2.1) (2018-Aug-31)
 
 - Fixed: The framework target `CFBundleShortVersionString` assignment was not bumped to reflect the current release.
