@@ -3,7 +3,7 @@ import UIKit
 public final class SheetManager {
     
     public enum Animation {
-        case fade, slideRight, slideLeft
+        case fade, slideRight, slideLeft, custom
     }
     
     public var chromeTapped: (() -> Void)? {
@@ -24,6 +24,8 @@ public final class SheetManager {
     
     public init(animation: Animation = .fade) {
         switch animation {
+        case .custom:
+            parentViewController = ParentViewController()
         case .fade:
             parentViewController = FadeViewController()
         case .slideRight, .slideLeft:
@@ -39,6 +41,8 @@ public final class SheetManager {
     public init(root: UIViewController, animation: Animation = .slideRight) {
         self.root = root
         switch animation {
+        case .custom:
+            parentViewController = ParentViewController()
         case .fade:
             parentViewController = FadeViewController()
         case .slideRight, .slideLeft:
