@@ -15,7 +15,7 @@ fileprivate final class ParentView: UIView {
 
 class ParentViewController: UIViewController {
     
-    var didShow: (() -> Void)?
+    var runSetNeeds: (() -> Void)?
     
     override public func loadView() {
         self.view = ParentView()
@@ -63,6 +63,7 @@ class ParentViewController: UIViewController {
         NSLayoutConstraint.activate(destinationConstraints)
         destination!.view!.layoutIfNeeded()
         view.layoutIfNeeded()
+        runSetNeeds?()
     }
     
     func transitionCleanUp() {
@@ -70,7 +71,6 @@ class ParentViewController: UIViewController {
         constraints = destination.view!.constraints // destination will become source
         source.view!.removeFromSuperview()
         source.removeFromParent() // popped. source is now destination
-        didShow?()
     }
     
     override public var childForStatusBarStyle: UIViewController? {

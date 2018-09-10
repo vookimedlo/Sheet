@@ -2,10 +2,17 @@ import UIKit
 
 public final class SheetManager {
     
+    /// The transition animation
+    ///
+    /// - fade: Alpha fade in / out
+    /// - slideRight: Each scene slides to the right
+    /// - slideLeft: Each scene slides to the left
+    /// - custom: No animation. You are expected to provide your own implementation of UIViewControllerAnimatedTransitioning.
     public enum Animation {
         case fade, slideRight, slideLeft, custom
     }
     
+    /// The code that executes when a tap gesture is recognised on the shaded area around the scene.
     public var chromeTapped: (() -> Void)? {
         didSet {
             transitionHandler.chromeViewTapped = chromeTapped
@@ -18,7 +25,7 @@ public final class SheetManager {
     
     private weak var root: UIViewController? {
         didSet {
-            parentViewController.didShow = didShow
+            parentViewController.runSetNeeds = runSetNeeds
         }
     }
     
@@ -37,6 +44,23 @@ public final class SheetManager {
         parentViewController.modalPresentationStyle = .custom
     }
     
+    /// Presents the presentation scene embedded with a view controller.
+    ///
+    /// - Parameters:
+    ///   - viewController: The view controller to be shown at the embedded initial scene.
+    ///   - root: The view controller that is presenting.
+    public func show(_ viewController: UIViewController, above root: UIViewController) {
+        self.root = root
+        parentViewController.setup(with: viewController)
+        runSetNeeds()
+        root.present(parentViewController, animated: true)
+    }
+    
+    private func runSetNeeds() {
+        root!.setNeedsStatusBarAppearanceUpdate()
+        root!.setNeedsUpdateOfHomeIndicatorAutoHidden()
+    }
+    
     @available(*, deprecated: 2.0.0, renamed: "init(animation:)")
     public init(root: UIViewController, animation: Animation = .slideRight) {
         self.root = root
@@ -53,22 +77,6 @@ public final class SheetManager {
         parentViewController.transitioningDelegate = transitionHandler
         parentViewController.modalPresentationStyle = .custom
     }
-    
-    public func show(_ viewController: UIViewController, above root: UIViewController) {
-        self.root = root
-        parentViewController.setup(with: viewController)
-        runSetNeeds()
-        root.present(parentViewController, animated: true)
-    }
-    
-    private func didShow() {
-        runSetNeeds()
-    }
-    
-    private func runSetNeeds() {
-        root!.setNeedsStatusBarAppearanceUpdate()
-        root!.setNeedsUpdateOfHomeIndicatorAutoHidden()
-    }
 }
 
 extension SheetManager {
@@ -76,7 +84,7 @@ extension SheetManager {
     public func present(_ viewController: UIViewController) {
         parentViewController.loadViewIfNeeded()
         parentViewController.show(viewController, sender: self)
-        parentViewController.didShow = didShow
+        parentViewController.runSetNeeds = runSetNeeds
         root!.present(parentViewController, animated: true)
     }
 }
