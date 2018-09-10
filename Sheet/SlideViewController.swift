@@ -17,7 +17,7 @@ final class SlideViewController: ParentViewController {
     var animation: Animation = .slideRight
     
     override func show(_ vc: UIViewController, sender: Any?) {
-        super.show(vc, sender: sender)
+        super.show(vc, sender: sender) // must call super
         let width = view.bounds.width
         switch animation {
         case .slideRight:
