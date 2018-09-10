@@ -109,6 +109,10 @@ The `viewDidLayoutSubviews` implementation is common between both controllers, s
 - [Safe Area Insets](https://github.com/rob-nash/Sheet/wiki/Safe-Area-Insets)
 - [The Vanishing Paper Plane](https://github.com/rob-nash/Sheet/wiki/Responding-To-Size-Class-Changes)
 
+## Next Release
+
+Version `3.0.0` is ready and will be officially released once Xcode 10 is out of beta. Check it out [here](https://github.com/rob-nash/Sheet/pull/3).
+
 ## Installation
 
 Add the following to your `Cartfile`.
