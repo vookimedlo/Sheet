@@ -29,7 +29,6 @@ class ParentViewController: UIViewController {
         return children.last
     }
     
-    var constraints: [NSLayoutConstraint]!
     var sourceCentreXAnchorConstraint: NSLayoutConstraint!
     var destinationCentreXAnchorConstraint: NSLayoutConstraint!
     
@@ -50,12 +49,12 @@ class ParentViewController: UIViewController {
         let constraints = traitCollection.constraints(forChild: source.view, inParent: view)
         sourceCentreXAnchorConstraint = constraints.first
         NSLayoutConstraint.activate(constraints)
-        self.constraints = constraints
     }
     
     override func show(_ vc: UIViewController, sender: Any?) {
+        vc.modalPresentationCapturesStatusBarAppearance = true
         source!.willMove(toParent: nil)
-        addChild(vc) // we now have a destination
+        addChild(vc)
         view.addSubview(destination!.view!)
         destination!.view!.translatesAutoresizingMaskIntoConstraints = false
         let destinationConstraints = traitCollection.constraints(forChild: destination!.view, inParent: view)
@@ -68,9 +67,8 @@ class ParentViewController: UIViewController {
     
     func transitionCleanUp() {
         destination.didMove(toParent: self)
-        constraints = destination.view!.constraints // destination will become source
         source.view!.removeFromSuperview()
-        source.removeFromParent() // popped. source is now destination
+        source.removeFromParent()
     }
     
     override public var childForStatusBarStyle: UIViewController? {
@@ -87,11 +85,10 @@ class ParentViewController: UIViewController {
     
     override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
         super.willTransition(to: newCollection, with: coordinator)
-        NSLayoutConstraint.deactivate(self.constraints)
+        NSLayoutConstraint.deactivate(view.constraints)
         let constraints = newCollection.constraints(forChild: source.view, inParent: view)
         sourceCentreXAnchorConstraint = constraints.first
         NSLayoutConstraint.activate(constraints)
-        self.constraints = constraints
         coordinator.animate(alongsideTransition: { [unowned self] _ in
             self.view.layoutIfNeeded()
             }, completion: nil)
