@@ -46,7 +46,7 @@ class ParentViewController: UIViewController {
     }
     
     private func setupSourceConstraints(_ primaryChild: UIViewController, _ traitCollection: UITraitCollection) {
-        let constraints = traitCollection.constraints(forChild: source.view, inParent: view)
+        let constraints = self.constraints(for: source.view)
         sourceCentreXAnchorConstraint = constraints.first
         NSLayoutConstraint.activate(constraints)
     }
@@ -57,9 +57,9 @@ class ParentViewController: UIViewController {
         addChild(vc)
         view.addSubview(destination!.view!)
         destination!.view!.translatesAutoresizingMaskIntoConstraints = false
-        let destinationConstraints = traitCollection.constraints(forChild: destination!.view, inParent: view)
-        destinationCentreXAnchorConstraint = destinationConstraints.first
-        NSLayoutConstraint.activate(destinationConstraints)
+        let constraints = self.constraints(for: destination.view)
+        destinationCentreXAnchorConstraint = constraints.first
+        NSLayoutConstraint.activate(constraints)
         destination!.view!.layoutIfNeeded()
         view.layoutIfNeeded()
         runSetNeeds?()
@@ -83,32 +83,12 @@ class ParentViewController: UIViewController {
         return children.last
     }
     
-    override func willTransition(to newCollection: UITraitCollection, with coordinator: UIViewControllerTransitionCoordinator) {
-        super.willTransition(to: newCollection, with: coordinator)
-        NSLayoutConstraint.deactivate(view.constraints)
-        let constraints = newCollection.constraints(forChild: source.view, inParent: view)
-        sourceCentreXAnchorConstraint = constraints.first
-        NSLayoutConstraint.activate(constraints)
-        coordinator.animate(alongsideTransition: { [unowned self] _ in
-            self.view.layoutIfNeeded()
-            }, completion: nil)
-    }
-}
-
-private extension UITraitCollection {
-    func constraints(forChild childView: UIView, inParent parentView: UIView) -> [NSLayoutConstraint] {
-        var constraints = [NSLayoutConstraint]()
-        constraints.append(childView.centerXAnchor.constraint(equalTo: parentView.centerXAnchor))
-        constraints.append(childView.bottomAnchor.constraint(equalTo: parentView.bottomAnchor))
-        if verticalSizeClass == .regular || verticalSizeClass == .unspecified {
-            let constraint = childView.widthAnchor.constraint(equalTo: parentView.widthAnchor)
-            constraint.priority = UILayoutPriority(rawValue: 999)
-            constraints.append(constraint)
-            let views: [String : Any] = ["childView" : childView]
-            constraints.append(contentsOf: NSLayoutConstraint.constraints(withVisualFormat: "[childView(<=414@1000)]", options: [], metrics: nil, views: views))
-        } else {
-            constraints.append(childView.widthAnchor.constraint(equalTo: parentView.heightAnchor))
-        }
-        return constraints
+    private func constraints(for childView: UIView) -> [NSLayoutConstraint] {
+        let constraint0 = childView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        let constraint1 = childView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        let constraint2 = childView.widthAnchor.constraint(equalTo: view.widthAnchor)
+        constraint2.priority = UILayoutPriority(rawValue: 999)
+        let constraints = NSLayoutConstraint.constraints(withVisualFormat: "[childView(<=414@1000)]", options: [], metrics: nil, views: ["childView" : childView])
+        return [constraint0, constraint1, constraint2] + constraints
     }
 }
