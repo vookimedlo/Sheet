@@ -93,6 +93,11 @@ fileprivate class PresentationController: UIPresentationController {
     
     override func dismissalTransitionWillBegin() {
         super.dismissalTransitionWillBegin()
+        for child in presentedViewController.children {
+            let isAppearing = false
+            child.beginAppearanceTransition(isAppearing, animated: true)
+            child.willMove(toParent: nil)
+        }
         if let coordinator = presentedViewController.transitionCoordinator {
             coordinator.animate(alongsideTransition: { _ in
                 self.dimmingView.alpha = 0
@@ -117,7 +122,7 @@ fileprivate class PresentationController: UIPresentationController {
     override func dismissalTransitionDidEnd(_ completed: Bool) {
         super.dismissalTransitionDidEnd(completed)
         for child in presentedViewController.children {
-            child.willMove(toParent: nil)
+            child.endAppearanceTransition()
             child.view!.removeFromSuperview()
             child.removeFromParent()
         }

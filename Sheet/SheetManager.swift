@@ -51,9 +51,12 @@ public final class SheetManager {
     ///   - root: The view controller that is presenting.
     public func show(_ viewController: UIViewController, above root: UIViewController) {
         self.root = root
+        let isAppearing = true
+        viewController.beginAppearanceTransition(isAppearing, animated: true)
         parentViewController.setup(with: viewController)
         runSetNeeds()
         root.present(parentViewController, animated: true)
+        viewController.endAppearanceTransition()
     }
     
     private func runSetNeeds() {
