@@ -12,6 +12,9 @@
     <a href="https://codebeat.co/projects/github-com-rob-nash-sheet-master">
     	<img alt="codebeat badge" src="https://codebeat.co/badges/94dfa117-7d48-451d-bff9-81117efe5032"/>
     </a>
+    <a href="https://app.fossa.io/projects/git%2Bgithub.com%2Frob-nash%2FSheet?ref=badge_shield" alt="FOSSA Status">
+        <img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Frob-nash%2FSheet.svg?type=shield"/>
+    </a>
     <a href="https://twitter.com/nashytitz">
         <img src="https://img.shields.io/badge/contact-@nashytitz-blue.svg?style=flat" alt="Twitter: @nashytitz"/>
     </a>
@@ -109,15 +112,15 @@ The `viewDidLayoutSubviews` implementation is common between both controllers, s
 - [Safe Area Insets](https://github.com/rob-nash/Sheet/wiki/Safe-Area-Insets)
 - [The Vanishing Paper Plane](https://github.com/rob-nash/Sheet/wiki/Responding-To-Size-Class-Changes)
 
+## Next Release
+
+Version `3.0.0` is ready and will be officially released once Xcode 10 is out of beta. Check it out [here](https://github.com/rob-nash/Sheet/pull/3).
+
 ## Installation
 
-Add the following to your `Cartfile`.
+Run `carthage update` and embed binary.
 
-```
-github rob-nash/Sheet
-```
-
-For the latest release, select the [Releases](https://github.com/rob-nash/Sheet/releases) tab.
+[More Details](https://github.com/rob-nash/Sheet/wiki/Installation)
 
 ## Demo
 
