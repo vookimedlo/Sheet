@@ -33,14 +33,13 @@ class ParentViewController: UIViewController {
     var destinationCentreXAnchorConstraint: NSLayoutConstraint!
     
     func setup(with vc: UIViewController) {
-        vc.loadViewIfNeeded()
         vc.modalPresentationCapturesStatusBarAppearance = true
         view.addSubview(vc.view!)
         addChild(vc)
         vc.view!.translatesAutoresizingMaskIntoConstraints = false
         vc.didMove(toParent: self)
     }
-    
+
     func setupInitialConstraints(_ traitCollection: UITraitCollection) {
         setupSourceConstraints(source, traitCollection)
     }
@@ -60,8 +59,6 @@ class ParentViewController: UIViewController {
         let constraints = self.constraints(for: destination.view)
         destinationCentreXAnchorConstraint = constraints.first
         NSLayoutConstraint.activate(constraints)
-        destination!.view!.layoutIfNeeded()
-        view.layoutIfNeeded()
         runSetNeeds?()
     }
     
