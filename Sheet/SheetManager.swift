@@ -63,31 +63,13 @@ public final class SheetManager {
         root!.setNeedsStatusBarAppearanceUpdate()
         root!.setNeedsUpdateOfHomeIndicatorAutoHidden()
     }
-    
-    @available(*, deprecated: 2.0.0, renamed: "init(animation:)")
-    public init(root: UIViewController, animation: Animation = .slideRight) {
-        self.root = root
-        switch animation {
-        case .custom:
-            parentViewController = ParentViewController()
-        case .fade:
-            parentViewController = FadeViewController()
-        case .slideRight, .slideLeft:
-            let controller = SlideViewController()
-            controller.animation = SlideViewController.Animation(animation)
-            parentViewController = controller
-        }
-        parentViewController.transitioningDelegate = transitionHandler
-        parentViewController.modalPresentationStyle = .custom
-    }
 }
 
 extension SheetManager {
-    @available(*, deprecated: 2.0.0, renamed: "show(above:)")
-    public func present(_ viewController: UIViewController) {
-        parentViewController.loadViewIfNeeded()
-        parentViewController.show(viewController, sender: self)
-        parentViewController.runSetNeeds = runSetNeeds
-        root!.present(parentViewController, animated: true)
-    }
+    
+    @available(*, unavailable, renamed: "init(animation:)")
+    public convenience init(root: UIViewController, animation: Animation = .slideRight) { self.init() }
+        
+    @available(*, unavailable, renamed: "show(above:)")
+    public func present(_ viewController: UIViewController) {}
 }
