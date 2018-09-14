@@ -115,13 +115,9 @@ Version `3.0.0` is ready and will be officially released once Xcode 10 is out of
 
 ## Installation
 
-Add the following to your `Cartfile`.
+Run `carthage update` and embed binary.
 
-```
-github rob-nash/Sheet
-```
-
-For the latest release, select the [Releases](https://github.com/rob-nash/Sheet/releases) tab.
+[More Details](https://github.com/rob-nash/Sheet/wiki/Installation)
 
 ## Demo
 
