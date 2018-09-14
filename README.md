@@ -12,6 +12,9 @@
     <a href="https://codebeat.co/projects/github-com-rob-nash-sheet-master">
     	<img alt="codebeat badge" src="https://codebeat.co/badges/94dfa117-7d48-451d-bff9-81117efe5032"/>
     </a>
+    <a href="https://app.fossa.io/projects/git%2Bgithub.com%2Frob-nash%2FSheet?ref=badge_shield" alt="FOSSA Status">
+        <img src="https://app.fossa.io/api/projects/git%2Bgithub.com%2Frob-nash%2FSheet.svg?type=shield"/>
+    </a>
     <a href="https://twitter.com/nashytitz">
         <img src="https://img.shields.io/badge/contact-@nashytitz-blue.svg?style=flat" alt="Twitter: @nashytitz"/>
     </a>
