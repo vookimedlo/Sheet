@@ -80,12 +80,46 @@ class ParentViewController: UIViewController {
         return children.last
     }
     
+    // MARK: - Constraints
+    
     private func constraints(for childView: UIView) -> [NSLayoutConstraint] {
-        let constraint0 = childView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        let constraint1 = childView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        let constraint2 = childView.widthAnchor.constraint(equalTo: view.widthAnchor)
-        constraint2.priority = UILayoutPriority(rawValue: 999)
-        let constraints = NSLayoutConstraint.constraints(withVisualFormat: "[childView(<=414@1000)]", options: [], metrics: nil, views: ["childView" : childView])
-        return [constraint0, constraint1, constraint2] + constraints
+        var constraints = [NSLayoutConstraint]()
+        constraints.append(centerXConstraint(for: childView))
+        constraints.append(bottomConstraint(for: childView))
+        constraints.append(contentsOf: widthConstraints(for: childView))
+        return constraints
+    }
+    
+    private func centerXConstraint(for childView: UIView) -> NSLayoutConstraint {
+        return childView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+    }
+    
+    private func bottomConstraint(for childView: UIView) -> NSLayoutConstraint {
+        return childView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+    }
+    
+    private func widthConstraints(for childView: UIView) -> [NSLayoutConstraint] {
+        return ChildControllerWidth.constraints(for: childView, inParent: view)
+    }
+    
+    private struct ChildControllerWidth {
+        
+        static func constraints(for childView: UIView, inParent parent: UIView) -> [NSLayoutConstraint] {
+            let constraint = sameAsParent(for: childView, inParent: parent)
+            let constraints = maxSize(for: childView)
+            return constraints + [constraint]
+        }
+        
+        private static func sameAsParent(for childView: UIView, inParent parent: UIView) -> NSLayoutConstraint {
+            let constraint = childView.widthAnchor.constraint(equalTo: parent.widthAnchor)
+            constraint.priority = UILayoutPriority(rawValue: 999)
+            return constraint
+        }
+        
+        private static func maxSize(for childView: UIView) -> [NSLayoutConstraint] {
+            let layout = "[childView(<=414@1000)]"
+            let views: [String : Any] = ["childView" : childView]
+            return NSLayoutConstraint.constraints(withVisualFormat: layout, options: [], metrics: nil, views: views)
+        }
     }
 }
