@@ -15,46 +15,111 @@ fileprivate final class ParentView: UIView {
 
 class ParentViewController: UIViewController {
     
-    var didShow: (() -> Void)?
+    var runSetNeeds: (() -> Void)?
     
     override public func loadView() {
         self.view = ParentView()
     }
     
-    /// A stack of child viewControllers is not maintained. Once a sheet is positioned on screen, any previous child is removed.
-    var primaryChild: UIViewController? {
-        return childViewControllers.first
+    var source: UIViewController! {
+        return children.first
     }
     
-    /// During a transition between childViewControllers, there may be a second child viewController.
-    var secondaryChild: UIViewController? {
-        return childViewControllers.last
+    var destination: UIViewController! {
+        return children.last
     }
+    
+    var sourceCentreXAnchorConstraint: NSLayoutConstraint!
+    var destinationCentreXAnchorConstraint: NSLayoutConstraint!
     
     func setup(with vc: UIViewController) {
-        vc.loadViewIfNeeded()
         vc.modalPresentationCapturesStatusBarAppearance = true
         view.addSubview(vc.view!)
-        addChildViewController(vc)
+        addChild(vc)
         vc.view!.translatesAutoresizingMaskIntoConstraints = false
-        vc.didMove(toParentViewController: self)
+        vc.didMove(toParent: self)
     }
-    
+
     func setupInitialConstraints(_ traitCollection: UITraitCollection) {
-        setupPrimaryChildConstraints(primaryChild!, traitCollection)
+        setupSourceConstraints(source, traitCollection)
     }
     
-    func setupPrimaryChildConstraints(_ primaryChild: UIViewController, _ traitCollection: UITraitCollection) {}
-    
-    override public var childViewControllerForStatusBarStyle: UIViewController? {
-        return childViewControllers.last
+    private func setupSourceConstraints(_ primaryChild: UIViewController, _ traitCollection: UITraitCollection) {
+        let constraints = self.constraints(for: source.view)
+        sourceCentreXAnchorConstraint = constraints.first
+        NSLayoutConstraint.activate(constraints)
     }
     
-    override public func childViewControllerForHomeIndicatorAutoHidden() -> UIViewController? {
-        return childViewControllers.last
+    override func show(_ vc: UIViewController, sender: Any?) {
+        vc.modalPresentationCapturesStatusBarAppearance = true
+        source!.willMove(toParent: nil)
+        addChild(vc)
+        view.addSubview(destination!.view!)
+        destination!.view!.translatesAutoresizingMaskIntoConstraints = false
+        let constraints = self.constraints(for: destination.view)
+        destinationCentreXAnchorConstraint = constraints.first
+        NSLayoutConstraint.activate(constraints)
+        runSetNeeds?()
     }
     
-    override public var childViewControllerForStatusBarHidden: UIViewController? {
-        return childViewControllers.last
+    func transitionCleanUp() {
+        destination.didMove(toParent: self)
+        source.view!.removeFromSuperview()
+        source.removeFromParent()
+    }
+    
+    override public var childForStatusBarStyle: UIViewController? {
+        return children.last
+    }
+    
+    override var childForHomeIndicatorAutoHidden: UIViewController? {
+        return children.last
+    }
+    
+    override public var childForStatusBarHidden: UIViewController? {
+        return children.last
+    }
+    
+    // MARK: - Constraints
+    
+    private func constraints(for childView: UIView) -> [NSLayoutConstraint] {
+        var constraints = [NSLayoutConstraint]()
+        constraints.append(centerXConstraint(for: childView))
+        constraints.append(bottomConstraint(for: childView))
+        constraints.append(contentsOf: widthConstraints(for: childView))
+        return constraints
+    }
+    
+    private func centerXConstraint(for childView: UIView) -> NSLayoutConstraint {
+        return childView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+    }
+    
+    private func bottomConstraint(for childView: UIView) -> NSLayoutConstraint {
+        return childView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+    }
+    
+    private func widthConstraints(for childView: UIView) -> [NSLayoutConstraint] {
+        return ChildControllerWidth.constraints(for: childView, inParent: view)
+    }
+    
+    private struct ChildControllerWidth {
+        
+        static func constraints(for childView: UIView, inParent parent: UIView) -> [NSLayoutConstraint] {
+            let constraint = sameAsParent(for: childView, inParent: parent)
+            let constraints = maxSize(for: childView)
+            return constraints + [constraint]
+        }
+        
+        private static func sameAsParent(for childView: UIView, inParent parent: UIView) -> NSLayoutConstraint {
+            let constraint = childView.widthAnchor.constraint(equalTo: parent.widthAnchor)
+            constraint.priority = UILayoutPriority(rawValue: 999)
+            return constraint
+        }
+        
+        private static func maxSize(for childView: UIView) -> [NSLayoutConstraint] {
+            let layout = "[childView(<=414@1000)]"
+            let views: [String : Any] = ["childView" : childView]
+            return NSLayoutConstraint.constraints(withVisualFormat: layout, options: [], metrics: nil, views: views)
+        }
     }
 }

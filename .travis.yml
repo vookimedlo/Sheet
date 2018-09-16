@@ -1,10 +1,24 @@
 language: swift
+osx_image: xcode10
+xcode_sdk: iphonesimulator12.0
 xcode_project: Sheet.xcodeproj
+xcode_scheme: Sheet
 
 branches:
  only:
  - master
- 
-script: 
- - xcodebuild -scheme Sender -sdk iphonesimulator -destination 'platform=iOS Simulator,name=iPhone 6,OS=11.4' test
- 
+
+steps: 
+  - run: 
+    name: Install FOSSA
+    command: curl -H 'Cache-Control: no-cache' https://raw.githubusercontent.com/fossas/fossa-cli/master/install.sh | sudo bash
+  - checkout
+
+before_script:
+  - cd <SOURCE_DIR> && fossa
+
+ script:
+  - xcodebuild clean build -scheme "$TRAVIS_XCODE_SCHEME" -project "$TRAVIS_XCODE_PROJECT" -sdk "$TRAVIS_XCODE_SDK"
+
+after_success:
+  - cd <SOURCE_DIR> && fossa test

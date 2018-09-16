@@ -2,10 +2,17 @@ import UIKit
 
 public final class SheetManager {
     
+    /// The transition animation
+    ///
+    /// - fade: Alpha fade in / out
+    /// - slideRight: Each scene slides to the right
+    /// - slideLeft: Each scene slides to the left
+    /// - custom: No animation. You are expected to provide your own implementation of UIViewControllerAnimatedTransitioning.
     public enum Animation {
-        case fade, slideRight, slideLeft
+        case fade, slideRight, slideLeft, custom
     }
     
+    /// The code that executes when a tap gesture is recognised on the shaded area around the scene.
     public var chromeTapped: (() -> Void)? {
         didSet {
             transitionHandler.chromeViewTapped = chromeTapped
@@ -18,12 +25,14 @@ public final class SheetManager {
     
     private weak var root: UIViewController? {
         didSet {
-            parentViewController.didShow = didShow
+            parentViewController.runSetNeeds = runSetNeeds
         }
     }
     
     public init(animation: Animation = .fade) {
         switch animation {
+        case .custom:
+            parentViewController = ParentViewController()
         case .fade:
             parentViewController = FadeViewController()
         case .slideRight, .slideLeft:
@@ -35,30 +44,19 @@ public final class SheetManager {
         parentViewController.modalPresentationStyle = .custom
     }
     
-    @available(*, deprecated: 2.0.0, renamed: "init(animation:)")
-    public init(root: UIViewController, animation: Animation = .slideRight) {
-        self.root = root
-        switch animation {
-        case .fade:
-            parentViewController = FadeViewController()
-        case .slideRight, .slideLeft:
-            let controller = SlideViewController()
-            controller.animation = SlideViewController.Animation(animation)
-            parentViewController = controller
-        }
-        parentViewController.transitioningDelegate = transitionHandler
-        parentViewController.modalPresentationStyle = .custom
-    }
-    
+    /// Presents the presentation scene embedded with a view controller.
+    ///
+    /// - Parameters:
+    ///   - viewController: The view controller to be shown at the embedded initial scene.
+    ///   - root: The view controller that is presenting.
     public func show(_ viewController: UIViewController, above root: UIViewController) {
         self.root = root
+        let isAppearing = true
+        viewController.beginAppearanceTransition(isAppearing, animated: true)
         parentViewController.setup(with: viewController)
         runSetNeeds()
         root.present(parentViewController, animated: true)
-    }
-    
-    private func didShow() {
-        runSetNeeds()
+        viewController.endAppearanceTransition()
     }
     
     private func runSetNeeds() {
@@ -68,11 +66,10 @@ public final class SheetManager {
 }
 
 extension SheetManager {
-    @available(*, deprecated: 2.0.0, renamed: "show(above:)")
-    public func present(_ viewController: UIViewController) {
-        parentViewController.loadViewIfNeeded()
-        parentViewController.show(viewController, sender: self)
-        parentViewController.didShow = didShow
-        root!.present(parentViewController, animated: true)
-    }
+    
+    @available(*, unavailable, renamed: "init(animation:)")
+    public convenience init(root: UIViewController, animation: Animation = .slideRight) { self.init() }
+        
+    @available(*, unavailable, renamed: "show(above:)")
+    public func present(_ viewController: UIViewController) {}
 }

@@ -3,7 +3,7 @@ import Sheet
 
 class ViewController: UIViewController {
 
-    private let sheetManager = SheetManager(animation: .slideRight)
+    private let sheetManager = SheetManager(animation: .custom)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,8 +18,14 @@ class ViewController: UIViewController {
     }
     
     @objc func tapGestureRecognized(_ sender: UITapGestureRecognizer) {
-        let viewController = UIStoryboard(name: "WelcomeSheet", bundle: nil).instantiateInitialViewController()!
+        
+        // when using SheetManager(animation: .custom) && custom segue
+        let viewController = UIStoryboard(name: "Custom", bundle: nil).instantiateInitialViewController()!
         sheetManager.show(viewController, above: self)
+        
+        // otherwise use this (or remove custom segue from Custom.storyboard)
+//        let viewController = UIStoryboard(name: "WelcomeSheet", bundle: nil).instantiateInitialViewController()!
+//        sheetManager.show(viewController, above: self)
     }
     
     deinit {

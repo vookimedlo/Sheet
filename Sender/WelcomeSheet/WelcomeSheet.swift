@@ -15,8 +15,13 @@ final class WelcomeSheetViewController: BaseViewController {
     }
     
     @IBAction func startButtonPressed(_ sender: UIButton) {
-        let viewController = UIStoryboard(name: "CompleteSheet", bundle: nil).instantiateInitialViewController()!
-        show(viewController, sender: self)
+        
+        // when using SheetManager(animation: .custom) && custom segue
+        performSegue(withIdentifier: "Custom", sender: self)
+        
+        // otherwise use this (or remove custom segue from Custom.storyboard)
+//        let viewController = UIStoryboard(name: "CompleteSheet", bundle: nil).instantiateInitialViewController()!
+//        show(viewController, sender: self)
     }
     
     @IBOutlet weak var iconImageViewContainerView: UIView!

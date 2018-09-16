@@ -24,9 +24,9 @@ A very light-weight action sheet. Responds to size class changes.
 
 ## Animations
 
-Fade             |  Slide
-:-------------------------:|:-------------------------:
-![Fade](https://user-images.githubusercontent.com/14126999/44885530-3dc44400-acb9-11e8-868f-20f8780ad24d.gif)  |  ![Slide](https://user-images.githubusercontent.com/14126999/44885592-94ca1900-acb9-11e8-9f91-2b8ca042cddf.gif)
+Fade             |  Slide       |   Custom
+:-------------------------:|:-------------------------:|:-------------------------:
+![Fade](https://user-images.githubusercontent.com/14126999/44885530-3dc44400-acb9-11e8-868f-20f8780ad24d.gif)  |  ![Slide](https://user-images.githubusercontent.com/14126999/44885592-94ca1900-acb9-11e8-9f91-2b8ca042cddf.gif) | [Custom](https://user-images.githubusercontent.com/14126999/45597756-a9502600-b9c8-11e8-9a45-b40c88038dcd.gif)
 
 ## iPad
 
@@ -109,27 +109,40 @@ final class CompleteSheetViewController: UIViewController {
 
 The `viewDidLayoutSubviews` implementation is common between both controllers, so you might want to create a superclass for it.
 
-- [Storyboard Layout](https://github.com/rob-nash/Sheet/wiki/Storyboard-Implementations)
-- [Safe Area Insets](https://github.com/rob-nash/Sheet/wiki/Safe-Area-Insets)
-- [The Vanishing Paper Plane](https://github.com/rob-nash/Sheet/wiki/Responding-To-Size-Class-Changes)
+Custom animation examples
 
-## Next Release
+```swift
+let sheetManager = SheetManager(animation: .custom)
 
-Version `3.0.0` is ready and will be officially released once Xcode 10 is out of beta. Check it out [here](https://github.com/rob-nash/Sheet/pull/3).
+final class FlipFromLeftSegue: StoryboardSegue {
+    
+    override func executeTransition(_ completion: @escaping () -> Void) {
+        UIView.transition(
+            from: source.view!,
+            to: destination.view!,
+            duration: 0.3,
+            options: [.transitionFlipFromLeft]) { (_) in
+                completion()
+            }
+    }
+}
 
-## Installation
+final class DropSegue: StoryboardSegue {
+    override func executeTransition(_ completion: @escaping () -> Void) {
+        destination.view.layoutIfNeeded()
+        destination.view.transform = CGAffineTransform(translationX: 0, y: destination.view.bounds.height)
+        let height = source.view.bounds.height
+        UIView.animate(withDuration: 0.3, animations: {
+            self.source.view.transform = CGAffineTransform(translationX: 0, y: height)
+            self.destination.view.transform = CGAffineTransform.identity
+        }) { _ in
+            completion()
+        }
+    }
+}
+```
 
-Run `carthage update` and embed binary.
-
-[More Details](https://github.com/rob-nash/Sheet/wiki/Installation)
-
-## Demo
-
-Run the Xcode scheme named `Sender`.
-
-## Footnote
-
-Try to realise the truth 😎 There is no spoon 🥄
+Modify Sheets In Situ
 
 ![](https://user-images.githubusercontent.com/14126999/44734588-339c1d00-aae2-11e8-9f50-58b835654fef.gif)
 
@@ -147,8 +160,19 @@ Try to realise the truth 😎 There is no spoon 🥄
     }
 ```
 
+- [Storyboard Layout](https://github.com/rob-nash/Sheet/wiki/Storyboard-Implementations)
+- [Safe Area Insets](https://github.com/rob-nash/Sheet/wiki/Safe-Area-Insets)
+- [The Vanishing Paper Plane](https://github.com/rob-nash/Sheet/wiki/Responding-To-Size-Class-Changes)
+
+## Installation
+
+1. run `carthage update`.
+2. Embed binary.
+
+[More Details](https://github.com/rob-nash/Sheet/wiki/Installation)
+
+## Demo
+
+Run the Xcode scheme named `Sender`.
+
 ![](https://user-images.githubusercontent.com/14126999/45015849-d987e400-b01a-11e8-8437-c97cc62f5c61.png)
-
-
-## License
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Frob-nash%2FSheet.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Frob-nash%2FSheet?ref=badge_large)
