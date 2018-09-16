@@ -31,6 +31,7 @@ Fade             |  Slide       |   Custom
 ## iPad
 
 ![iPad](https://user-images.githubusercontent.com/14126999/44899553-fca05400-acf9-11e8-878e-de5bcff58c9d.gif)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Frob-nash%2FSheet.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Frob-nash%2FSheet?ref=badge_shield)
 
 ## Usage
 
@@ -173,3 +174,5 @@ Modify Sheets In Situ
 ## Demo
 
 Run the Xcode scheme named `Sender`.
+
+![](https://user-images.githubusercontent.com/14126999/45015849-d987e400-b01a-11e8-8437-c97cc62f5c61.png)
