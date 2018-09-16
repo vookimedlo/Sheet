@@ -3,6 +3,7 @@
 ## [3.0.0](https://github.com/rob-nash/Sheet/releases/tag/3.0.0)
 
 - Custom transitions now available.
+- Swift 4.2
 - All previous depracated functions are now unavailable.
 
 ## [2.2.2](https://github.com/rob-nash/Sheet/releases/tag/2.2.2)
