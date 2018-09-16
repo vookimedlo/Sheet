@@ -1,12 +1,12 @@
 # Change Log
 
-## [3.0.0](https://github.com/rob-nash/Sheet/releases/tag/3.0.0)
+## [3.0.0](https://github.com/rob-nash/Sheet/releases/tag/3.0.0) (2018-Sep-16)
 
 - Custom transitions now available.
 - Swift 4.2
 - All previous depracated functions are now unavailable.
 
-## [2.2.2](https://github.com/rob-nash/Sheet/releases/tag/2.2.2)
+## [2.2.2](https://github.com/rob-nash/Sheet/releases/tag/2.2.2) (2018-Sep-06)
 
 - Fixed: GitHub issue [#2](https://github.com/rob-nash/Sheet/issues/2). UI pushes beyond view port on 4 inch devices.
 
