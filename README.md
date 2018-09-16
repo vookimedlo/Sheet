@@ -30,12 +30,7 @@ Fade             |  Slide       |   Custom
 
 ## Usage
 
-Use the following code to setup an action sheet.
-
 ```swift
-import UIKit
-import Sheet
-
 extension Notification.Name {
     static let dismiss = Notification.Name(rawValue: "Dismiss")
 }
@@ -65,11 +60,7 @@ class ViewController: UIViewController {
         NotificationCenter.default.removeObserver(self)
     }
 }
-```
 
-You can use a storyboard to build the individual sheets, if you wish. The first sheet in the above gif is named `WelcomeSheetViewController`. It looks like this.
-
-```swift
 final class WelcomeSheetViewController: UIViewController {
         
     @IBAction func startButtonPressed(_ sender: UIButton) {
@@ -83,11 +74,7 @@ final class WelcomeSheetViewController: UIViewController {
         view.layer.cornerRadius = view.bounds.width * 0.1
     }
 }
-```
 
-The second sheet in the above gif is named `CompleteSheetViewController`. It looks like this.
-
-```swift
 final class CompleteSheetViewController: UIViewController {
         
     @IBAction func finishButtonPressed(_ sender: UIButton) {
@@ -102,9 +89,9 @@ final class CompleteSheetViewController: UIViewController {
 }
 ```
 
-The `viewDidLayoutSubviews` implementation is common between both controllers, so you might want to create a superclass for it.
+The `viewDidLayoutSubviews` function could be pushed into a superclass.
 
-Custom animation examples
+## Custom animations
 
 ```swift
 let sheetManager = SheetManager(animation: .custom)
@@ -137,7 +124,7 @@ final class DropSegue: StoryboardSegue {
 }
 ```
 
-Modify Sheets In Situ
+## Modify Sheets In Situ
 
 ![](https://user-images.githubusercontent.com/14126999/44734588-339c1d00-aae2-11e8-9f50-58b835654fef.gif)
 
