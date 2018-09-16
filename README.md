@@ -26,7 +26,7 @@ A very light-weight action sheet. Responds to size class changes.
 
 Fade             |  Slide       |   Custom
 :-------------------------:|:-------------------------:|:-------------------------:
-![Fade](https://user-images.githubusercontent.com/14126999/44885530-3dc44400-acb9-11e8-868f-20f8780ad24d.gif)  |  ![Slide](https://user-images.githubusercontent.com/14126999/44885592-94ca1900-acb9-11e8-9f91-2b8ca042cddf.gif) | ![Custom](https://user-images.githubusercontent.com/14126999/45597756-a9502600-b9c8-11e8-9a45-b40c88038dcd.gif)
+![Fade](https://user-images.githubusercontent.com/14126999/44885530-3dc44400-acb9-11e8-868f-20f8780ad24d.gif)  |  ![Slide](https://user-images.githubusercontent.com/14126999/44885592-94ca1900-acb9-11e8-9f91-2b8ca042cddf.gif) | ![Custom](https://user-images.githubusercontent.com/14126999/45597930-49a74a00-b9cb-11e8-9dff-bf26a0d43efa.gif)
 
 ## Usage
 
