@@ -148,10 +148,10 @@ final class DropSegue: StoryboardSegue {
 
 ## Installation
 
-1. run `carthage update`.
-2. Embed binary.
+1. Run `carthage update`
+2. Embed binary
 
-[More Details](https://github.com/rob-nash/Sheet/wiki/Installation)
+[See Guide](https://github.com/rob-nash/Sheet/wiki/Installation)
 
 ## Demo
 
