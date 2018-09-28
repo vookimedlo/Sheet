@@ -32,7 +32,7 @@ Fade             |  Slide       |   Custom
 
 Snapshot 1             |  Snapshot 2       |   Snapshot 3
 :-------------------------:|:-------------------------:|:-------------------------:
-![1](https://user-images.githubusercontent.com/14126999/46196881-184e4880-c300-11e8-827a-bf60b9f6285c.PNG)  |  ![2](https://user-images.githubusercontent.com/14126999/46196886-1b493900-c300-11e8-8de8-62f5790869f6.PNG) | ![3](https://user-images.githubusercontent.com/14126999/46196893-1edcc000-c300-11e8-9a02-be2b3bf05511.PNG)
+![1](https://user-images.githubusercontent.com/14126999/46196881-184e4880-c300-11e8-827a-bf60b9f6285c.PNG)  |  ![2](https://user-images.githubusercontent.com/14126999/46197864-e2f72a00-c302-11e8-8611-d98abd3f3bc3.PNG) | ![3](https://user-images.githubusercontent.com/14126999/46196893-1edcc000-c300-11e8-9a02-be2b3bf05511.PNG)
 
 ## Usage
 
