@@ -4,7 +4,7 @@ final class SlideViewController: ParentViewController {
     
     enum Animation {
         case slideRight, slideLeft
-        init(_ animation: SheetManager.Animation) {
+        init(_ animation: Sheet.Animation) {
             switch animation {
             case .slideRight:
                 self = .slideRight
@@ -13,7 +13,7 @@ final class SlideViewController: ParentViewController {
             }
         }
     }
-    
+        
     var animation: Animation = .slideRight
     
     override func show(_ vc: UIViewController, sender: Any?) {
