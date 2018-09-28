@@ -28,6 +28,8 @@ Fade             |  Slide       |   Custom
 :-------------------------:|:-------------------------:|:-------------------------:
 ![Fade](https://user-images.githubusercontent.com/14126999/44885530-3dc44400-acb9-11e8-868f-20f8780ad24d.gif)  |  ![Slide](https://user-images.githubusercontent.com/14126999/44885592-94ca1900-acb9-11e8-9f91-2b8ca042cddf.gif) | ![Custom](https://user-images.githubusercontent.com/14126999/45597983-511b2300-b9cc-11e8-8661-dca3c6de0a51.gif)
 
+## Apply padding
+
 Snapshot 1             |  Snapshot 2       |   Snapshot 3
 :-------------------------:|:-------------------------:|:-------------------------:
 ![1](https://user-images.githubusercontent.com/14126999/46196881-184e4880-c300-11e8-827a-bf60b9f6285c.PNG)  |  ![2](https://user-images.githubusercontent.com/14126999/46196886-1b493900-c300-11e8-8de8-62f5790869f6.PNG) | ![3](https://user-images.githubusercontent.com/14126999/46196893-1edcc000-c300-11e8-9a02-be2b3bf05511.PNG)
