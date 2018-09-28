@@ -1,5 +1,15 @@
 # Change Log
 
+## [4.0.0](https://github.com/rob-nash/Sheet/releases/tag/4.0.0) (2018-Sep-28)
+
+ - Renamed `SheetManager` to `Sheet`.
+ - Sheet can now be inset with padding.
+
+```swift
+@available(*, unavailable, renamed: "Sheet")
+public final class SheetManager {}
+```
+
 ## [3.0.0](https://github.com/rob-nash/Sheet/releases/tag/3.0.0) (2018-Sep-16)
 
 - Custom transitions now available.
