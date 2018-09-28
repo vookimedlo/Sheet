@@ -32,6 +32,17 @@ class ParentViewController: UIViewController {
     var sourceCentreXAnchorConstraint: NSLayoutConstraint!
     var destinationCentreXAnchorConstraint: NSLayoutConstraint!
     
+    let insets: Sheet.Insets
+    
+    init(_ insets: Sheet.Insets) {
+        self.insets = insets
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     func setup(with vc: UIViewController) {
         vc.modalPresentationCapturesStatusBarAppearance = true
         view.addSubview(vc.view!)
@@ -45,7 +56,7 @@ class ParentViewController: UIViewController {
     }
     
     private func setupSourceConstraints(_ primaryChild: UIViewController, _ traitCollection: UITraitCollection) {
-        let constraints = self.constraints(for: source.view)
+        let constraints = self.constraints(for: source.view, widthInset: insets.width, bottomInset: insets.bottom)
         sourceCentreXAnchorConstraint = constraints.first
         NSLayoutConstraint.activate(constraints)
     }
@@ -56,7 +67,7 @@ class ParentViewController: UIViewController {
         addChild(vc)
         view.addSubview(destination!.view!)
         destination!.view!.translatesAutoresizingMaskIntoConstraints = false
-        let constraints = self.constraints(for: destination.view)
+        let constraints = self.constraints(for: destination.view, widthInset: insets.width, bottomInset: insets.bottom)
         destinationCentreXAnchorConstraint = constraints.first
         NSLayoutConstraint.activate(constraints)
         runSetNeeds?()
@@ -82,11 +93,11 @@ class ParentViewController: UIViewController {
     
     // MARK: - Constraints
     
-    private func constraints(for childView: UIView) -> [NSLayoutConstraint] {
+    private func constraints(for childView: UIView, widthInset: CGFloat, bottomInset: CGFloat) -> [NSLayoutConstraint] {
         var constraints = [NSLayoutConstraint]()
         constraints.append(centerXConstraint(for: childView))
-        constraints.append(bottomConstraint(for: childView))
-        constraints.append(contentsOf: widthConstraints(for: childView))
+        constraints.append(bottomConstraint(for: childView, inset: -bottomInset))
+        constraints.append(contentsOf: widthConstraints(for: childView, inset: -widthInset))
         return constraints
     }
     
@@ -94,24 +105,24 @@ class ParentViewController: UIViewController {
         return childView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
     }
     
-    private func bottomConstraint(for childView: UIView) -> NSLayoutConstraint {
-        return childView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+    private func bottomConstraint(for childView: UIView, inset: CGFloat) -> NSLayoutConstraint {
+        return childView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: inset)
     }
     
-    private func widthConstraints(for childView: UIView) -> [NSLayoutConstraint] {
-        return ChildControllerWidth.constraints(for: childView, inParent: view)
+    private func widthConstraints(for childView: UIView, inset: CGFloat) -> [NSLayoutConstraint] {
+        return ChildControllerWidth.constraints(for: childView, inParent: view, inset: inset)
     }
     
     private struct ChildControllerWidth {
         
-        static func constraints(for childView: UIView, inParent parent: UIView) -> [NSLayoutConstraint] {
-            let constraint = sameAsParent(for: childView, inParent: parent)
+        static func constraints(for childView: UIView, inParent parent: UIView, inset: CGFloat) -> [NSLayoutConstraint] {
+            let constraint = sameAsParent(for: childView, inParent: parent, inset: inset)
             let constraints = maxSize(for: childView)
             return constraints + [constraint]
         }
         
-        private static func sameAsParent(for childView: UIView, inParent parent: UIView) -> NSLayoutConstraint {
-            let constraint = childView.widthAnchor.constraint(equalTo: parent.widthAnchor)
+        private static func sameAsParent(for childView: UIView, inParent parent: UIView, inset: CGFloat) -> NSLayoutConstraint {
+            let constraint = childView.widthAnchor.constraint(equalTo: parent.widthAnchor, constant: inset)
             constraint.priority = UILayoutPriority(rawValue: 999)
             return constraint
         }

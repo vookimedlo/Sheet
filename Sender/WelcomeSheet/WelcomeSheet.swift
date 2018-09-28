@@ -16,7 +16,7 @@ final class WelcomeSheetViewController: BaseViewController {
     
     @IBAction func startButtonPressed(_ sender: UIButton) {
         
-        // when using SheetManager(animation: .custom) && custom segue
+        // when using Sheet(animation: .custom) && custom segue
         performSegue(withIdentifier: "Custom", sender: self)
         
         // otherwise use this (or remove custom segue from Custom.storyboard)
