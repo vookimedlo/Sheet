@@ -17,7 +17,9 @@
     </a>
 </p>
 
-A very light-weight action sheet. Responds to size class changes.
+A very light-weight action sheet. Responds to size class changes. Can be assembled in a storyboard.
+
+![](https://user-images.githubusercontent.com/14126999/50140424-946f8100-029c-11e9-867d-f01555ba94e9.png)
 
 ## Animations
 
