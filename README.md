@@ -33,9 +33,13 @@ Snapshot 1             |  Snapshot 2       |   Snapshot 3
 :-------------------------:|:-------------------------:|:-------------------------:
 ![1](https://user-images.githubusercontent.com/14126999/46196881-184e4880-c300-11e8-827a-bf60b9f6285c.PNG)  |  ![2](https://user-images.githubusercontent.com/14126999/46197864-e2f72a00-c302-11e8-8611-d98abd3f3bc3.PNG) | ![3](https://user-images.githubusercontent.com/14126999/46196893-1edcc000-c300-11e8-9a02-be2b3bf05511.PNG)
 
+- [Storyboard Layout](https://github.com/rob-nash/Sheet/wiki/Storyboard-Implementations)
+- [Safe Area Insets](https://github.com/rob-nash/Sheet/wiki/Safe-Area-Insets)
+- [The Vanishing Paper Plane](https://github.com/rob-nash/Sheet/wiki/Responding-To-Size-Class-Changes)
+
 ## Tricky example (Vimeo Vid)
 
-[Vimeo](https://vimeo.com/293353055)
+https://vimeo.com/293353055
 
 ## Usage
 
@@ -150,10 +154,6 @@ final class DropSegue: StoryboardSegue {
 //        NotificationCenter.default.post(name: .dismiss, object: nil)
     }
 ```
-
-- [Storyboard Layout](https://github.com/rob-nash/Sheet/wiki/Storyboard-Implementations)
-- [Safe Area Insets](https://github.com/rob-nash/Sheet/wiki/Safe-Area-Insets)
-- [The Vanishing Paper Plane](https://github.com/rob-nash/Sheet/wiki/Responding-To-Size-Class-Changes)
 
 ## Installation
 
