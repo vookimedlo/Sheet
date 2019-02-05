@@ -1,5 +1,9 @@
 # Change Log
 
+## [4.0.1](https://github.com/rob-nash/Sheet/releases/tag/4.0.1) (2019-Feb-05)
+
+ - Droped deployment target to iOS 11
+
 ## [4.0.0](https://github.com/rob-nash/Sheet/releases/tag/4.0.0) (2018-Sep-28)
 
  - Renamed `SheetManager` to `Sheet`.
