@@ -22,6 +22,8 @@ public enum ApplicationPermissionStatus {
             self = .denied(message)
         case .granted:
             self = .granted
+        @unknown default:
+            fatalError()
         }
     }
 }
@@ -49,6 +51,8 @@ public enum AccountStatus {
         case .noAccount:
             let message = "In the settings App, navigate to the AppleID menu and sign-in to iCloud.\n\nIf you are already signed-in, navigate to the iCloud sub-menu and check this App is listed there as 'enabled'."
             self = .noAccount(message)
+        @unknown default:
+            fatalError()
         }
     }
 }
