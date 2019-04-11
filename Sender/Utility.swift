@@ -1,14 +1,8 @@
 import UIKit
 import SystemConfiguration
 
-let dismissSheetAnimatedKey = "keyDismissSheetAnimated"
-let showFriendsKey = "keyShowFriends"
 let font1 = UIFont(name: "AvenirNext-Medium", size: 17).require(hint: "The fonts have been ripped out of the project. Hmm...")
 let font2 = UIFont(name: "AvenirNext-DemiBold", size: 17).require(hint: "The fonts have been ripped out of the project. Hmm...")
-
-extension Notification.Name {
-    static let dismiss = Notification.Name(rawValue: "Dismiss")
-}
 
 func typeName(_ some: Any) -> String {
     return (some is Any.Type) ? "\(some)" : "\(type(of: some))"

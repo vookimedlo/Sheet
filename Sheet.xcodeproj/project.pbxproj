@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		5005C40D2138256200873318 /* Sheet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50FB6A132134139E002D0551 /* Sheet.framework */; };
 		5005C40E2138256200873318 /* Sheet.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 50FB6A132134139E002D0551 /* Sheet.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5063B635225F1F1E00B5244A /* SheetNotificationObserverFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5063B634225F1F1E00B5244A /* SheetNotificationObserverFactory.swift */; };
+		5063B637225F23C700B5244A /* ShareType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5063B636225F23C700B5244A /* ShareType.swift */; };
+		5063B63B225F415E00B5244A /* SheetFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5063B63A225F415E00B5244A /* SheetFactory.swift */; };
 		5070833821464FF800AAABC4 /* Custom.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5070833721464FF800AAABC4 /* Custom.storyboard */; };
 		5070833B2146504D00AAABC4 /* Custom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5070833A2146504D00AAABC4 /* Custom.swift */; };
 		5070833D2146601200AAABC4 /* Segue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5070833C2146601200AAABC4 /* Segue.swift */; };
@@ -77,6 +80,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		5063B634225F1F1E00B5244A /* SheetNotificationObserverFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetNotificationObserverFactory.swift; sourceTree = "<group>"; };
+		5063B636225F23C700B5244A /* ShareType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareType.swift; sourceTree = "<group>"; };
+		5063B63A225F415E00B5244A /* SheetFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetFactory.swift; sourceTree = "<group>"; };
 		5070833721464FF800AAABC4 /* Custom.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Custom.storyboard; sourceTree = "<group>"; };
 		5070833A2146504D00AAABC4 /* Custom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Custom.swift; sourceTree = "<group>"; };
 		5070833C2146601200AAABC4 /* Segue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Segue.swift; sourceTree = "<group>"; };
@@ -234,7 +240,6 @@
 			children = (
 				50FB6A152134139E002D0551 /* Sheet */,
 				50FB6A23213413C4002D0551 /* Sender */,
-				50FB6A142134139E002D0551 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
@@ -245,6 +250,7 @@
 				50FB6A22213413C4002D0551 /* Sender.app */,
 			);
 			name = Products;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		50FB6A152134139E002D0551 /* Sheet */ = {
@@ -273,6 +279,10 @@
 				50FB6A28213413C4002D0551 /* Main.storyboard */,
 				50FB6A26213413C4002D0551 /* ViewController.swift */,
 				50A74D3621636066003889C5 /* ShareViewController.swift */,
+				5063B636225F23C700B5244A /* ShareType.swift */,
+				5063B634225F1F1E00B5244A /* SheetNotificationObserverFactory.swift */,
+				5063B63A225F415E00B5244A /* SheetFactory.swift */,
+				50FB6A142134139E002D0551 /* Products */,
 				50A74D1B21635E45003889C5 /* Simple */,
 				50A74D1C21635E6C003889C5 /* Tricky */,
 				50A74D0D21635987003889C5 /* Require */,
@@ -422,6 +432,7 @@
 				50A74D2E21635ED6003889C5 /* AwkwardViewController.swift in Sources */,
 				50E624652135371300F1CC98 /* CompleteSheet.swift in Sources */,
 				50FB6A27213413C4002D0551 /* ViewController.swift in Sources */,
+				5063B635225F1F1E00B5244A /* SheetNotificationObserverFactory.swift in Sources */,
 				50FB6A3B213427FC002D0551 /* WelcomeSheet.swift in Sources */,
 				50A74D3421635ED6003889C5 /* StandardSheetViewController.swift in Sources */,
 				50FB6A25213413C4002D0551 /* AppDelegate.swift in Sources */,
@@ -438,9 +449,11 @@
 				50A74D3221635ED6003889C5 /* ContactingViewController.swift in Sources */,
 				50A74D3921636ACC003889C5 /* CustomSegue.swift in Sources */,
 				50941C192138A8F900E8931C /* BaseViewController.swift in Sources */,
+				5063B637225F23C700B5244A /* ShareType.swift in Sources */,
 				50A74D2A21635ED6003889C5 /* NetworkFailureViewController.swift in Sources */,
 				50A74D2921635ED6003889C5 /* ConnectViewController.swift in Sources */,
 				50A74D072163596B003889C5 /* Feedback.swift in Sources */,
+				5063B63B225F415E00B5244A /* SheetFactory.swift in Sources */,
 				50A74D1721635AAD003889C5 /* Utility.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
